@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <title>សំណួរភាសាអង់គ្លេស</title>
+    <meta name="theme-color" content="#1e2852">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png"> 
+    
+    <style>
+        
+        /* ----------------------- BASE STYLES ----------------------- */
+        @font-face {
+            font-family: 'Khmer OS Muol Light';
+            /* ត្រូវប្រាកដថាអ្នកមាន font នេះនៅក្នុង project របស់អ្នក ឬត្រូវផ្ទុកពីប្រភពមួយ */
+            src: url('KhmerOSMuol-Light.ttf') format('truetype'); 
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Khmer OS Battambang', Arial, 'Segoe UI', Tahoma, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4c669f 0%, #1e2852 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ----------------------- HEADER STYLES ----------------------- */
+        header {
+            background: linear-gradient(90deg, #1e2852, #4c669f);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            border-bottom: 5px solid #f8c050;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* ----------------------- MAIN CONTENT ----------------------- */
+        .main-content {
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            color: #1e2852;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* ----------------------- FOOTER STYLES (កែតម្រូវថ្មី) ----------------------- */
+        footer {
+            padding: 10px;
+            text-align: center;
+            /* ពណ៌ទឹកប៊ិចខ្ចីដែលបានស្នើសុំ */
+            background-color: #D1E6FF; /* Light Blue/Azure */
+            border-top: 1px solid #ddd;
+            color: #1e2852;
+        }
+
+        footer p {
+            /* រក្សា Font Khmer OS Muol Light */
+            font-family: 'Khmer OS Muol Light', 'Khmer OS Battambang', sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        /* ----------------------- GENERAL BUTTON STYLES (Apply to all buttons) ----------------------- */
+        button {
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            line-height: 1.1; 
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Styles for two-line text in ALL buttons */
+        button .text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+            padding: 0 5px;
+        }
+        
+        button .khmer {
+            font-size: 14px; 
+            font-weight: 600;
+        }
+        
+        /* ENLARGED ENGLISH FONT SIZE */
+        button .english {
+            font-size: 12px;
+            font-weight: 500;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+        
+        button i.fas {
+            margin-bottom: 5px; 
+            font-size: 18px;
+        }
+
+        /* ----------------------- CATEGORY SECTION STYLES ----------------------- */
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .category-btn {
+            background: #70def1;
+            color: #06021c;
+            padding: 10px 8px;
+            min-height: 65px; 
+        }
+        
+        .category-btn .khmer {
+            font-size: 15px;
+        }
+
+        .category-btn.active {
+            background: #caed71;
+            color: #1e2852;
+            font-weight: 700;
+            box-shadow: 0 4px 8px rgba(248, 192, 80, 0.5);
+        }
+        
+        /* Back Button Style */
+        .back-btn {
+            background: #1e2852; 
+            color: white;
+            padding: 8px 12px;
+            font-size: 14px;
+            gap: 5px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+
+        /* ----------------------- QUESTION & ANSWER BOXES ----------------------- */
+        .qa-box {
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Question Box Styling */
+        #question-box {
+            background-color: #f8f8f8;
+            border-left: 5px solid #4c669f;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e2852;
+            margin-bottom: 5px;
+        }
+        
+        .question-translation {
+            font-size: 15px;
+            font-style: italic;
+            color: #7a209e;
+        }
+
+        /* Answer Box Styling */
+        #answer-box {
+            background-color: #fffbe6;
+            border-left: 5px solid #f8c050;
+            min-height: 50px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .answer-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #17065f;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .answer-text {
+            font-size: 17px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .answer-translation {
+            font-size: 14px;
+            font-style: italic;
+            color: #a0522d;
+        }
+
+        /* ----------------------- CONTROLS (Action Buttons) ----------------------- */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .controls button {
+            flex: 1;
+            min-height: 65px; 
+            padding: 10px 8px;
+        }
+        
+        /* កែតម្រូវប៊ូតុងបញ្ជាឱ្យ icon នៅខាងឆ្វេង និង text ក្រោម */
+        .controls button {
+            padding: 10px 8px;
+            min-height: 65px;
+        }
+
+        .controls button .khmer-and-icon {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            gap: 5px; 
+            order: 1;
+            padding-left: 5px;
+        }
+        
+        .controls button i.fas {
+             order: 1; 
+             margin: 0; 
+             font-size: 16px; 
+             align-self: center;
+        }
+        
+        .controls button .khmer {
+             order: 2;
+             line-height: 1;
+             font-size: 14px; 
+             font-weight: 600;
+        }
+        
+        .controls button .text-container {
+            order: 2;
+            align-items: flex-start;
+            width: 100%; 
+            padding: 0 5px;
+            margin-top: 2px;
+        }
+        
+        .controls button .english {
+            font-size: 12px; 
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        /* ប៊ូតុងមេ: សំណួរចៃដន្យ */
+        .primary-btn { background: #4c669f; color: white; }
+        /* ប៊ូតុងបង្ហាញចម្លើយ */
+        .secondary-btn { background: #f8c050; color: #1e2852; }
+        /* ប៊ូតុងបកប្រែ */
+        .translate-btn { background: #7a209e; color: white; }
+        /* ប៊ូតុងសំឡេង */
+        .voice-btn { background: #28a745; color: white; }
+/* ----------------------- NOTIFICATION STYLES (កែតម្រូវថ្មី) ----------------------- */
+/* Animation Keyframes: ពីស្តាំទៅឆ្វេង (Slide In) ចូលមកតែបន្តិច*/
+@keyframes slideIn {
+    0% { 
+        transform: translate(100%, -50%); /* ចាប់ផ្តើមពីខាងស្តាំឆ្ងាយ */
+        opacity: 0;
+    }
+    30% { /* ដំណាក់កាលចូល: ឈប់នៅត្រឹម 20% នៃ left: 50% (គឺនៅខាងស្តាំកណ្តាលបន្តិច) */
+        transform: translate(20%, -50%); /* កែតម្រូវនៅទីនេះ */
+        opacity: 1;
+    }
+    70% { /* ស្ថិតនៅដដែល: រក្សាតម្លៃ 20% */
+        transform: translate(20%, -50%); /* កែតម្រូវនៅទីនេះ */
+        opacity: 1;
+    }
+    100% { /* ចេញទៅវិញ */
+        transform: translate(100%, -50%);
+        opacity: 0;
+    }
+}
+
+.notification {
+    position: fixed;
+    /* ផ្លាស់ប្តូរទីតាំងទៅក្រោម header */
+    top: 105px; /* កែតម្រូវឱ្យនៅក្រោម header បន្តិច */
+    left: 50%;
+    transform: translateX(150%); /* ចាប់ផ្តើមពីខាងស្តាំឆ្ងាយ */
+    
+    /* ផ្ទៃខាងក្រោយផ្កាឈូក អក្សរទឹកប៊ិច */
+    background-color: #FFC0CB; /* Pink */
+    color: #1e2852; /* Dark Blue */
+    
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 1000;
+    opacity: 0;
+    
+    /* បិទ Transition ចាស់ */
+    transition: none; 
+    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    pointer-events: none;
+    max-width: 90%;
+    text-align: center;
+}
+
+.notification.show {
+    opacity: 1; 
+    /* ប្រើ animation សម្រាប់ចលនាចេញ-ចូល */
+    animation: slideIn 2.5s ease-out forwards; 
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-graduation-cap"></i> សំណួរភាសាអង់គ្លេស</h1>
+            <p class="subtitle">បង្កើនសមត្ថភាពសន្ទនាប្រចាំថ្ងៃ</p>
+        </header>
+        
+        <div class="main-content">
+            
+            <div class="category-header hidden" id="selected-category-header">
+                <h2 id="selected-category-title"><i class="fas fa-list"></i> ប្រភេទ</h2>
+                <button class="back-btn" id="back-btn">
+    
+                    <div class="text-container">
+                        <span class="khmer">ត្រលប់ក្រោយ</span>
+                        <span class="english">Back</span>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="category-section" id="category-main-section">
+                <h2><i class="fas fa-folder-open"></i> ជ្រើសរើសប្រភេទសំណួរ</h2>
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="all">
+                        <div class="text-container">
+                            <span class="khmer">ទាំងអស់</span>
+                            <span class="english">All</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="daily">
+                         <div class="text-container">
+                            <span class="khmer">សកម្មភាពប្រចាំថ្ងៃ</span>
+                            <span class="english">Daily Activities</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="conversation">
+                        <div class="text-container">
+                            <span class="khmer">ការសន្ទនា</span>
+                            <span class="english">Conversation</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="food">
+                        <div class="text-container">
+                            <span class="khmer">អាហារ</span>
+                            <span class="english">Food</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="travel">
+                        <div class="text-container">
+                            <span class="khmer">ការធ្វើដំណើរ</span>
+                            <span class="english">Travel</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="shopping">
+                        <div class="text-container">
+                            <span class="khmer">ការទិញទំនិញ</span>
+                            <span class="english">Shopping</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="work">
+                        <div class="text-container">
+                            <span class="khmer">ការងារ</span>
+                            <span class="english">Work</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="health">
+                        <div class="text-container">
+                            <span class="khmer">សុខភាព</span>
+                            <span class="english">Health</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="hobbies">
+                        <div class="text-container">
+                            <span class="khmer">ចំណង់ចំណូលចិត្ត</span>
+                            <span class="english">Hobbies</span>
+                        </div>
+                    </button>
+                    <button class="category-btn" data-category="thinking">
+                        <div class="text-container">
+                            <span class="khmer">សំណួរត្រិះរិះ</span>
+                            <span class="english">Thinking Questions</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="qa-box" id="question-box">
+                <p class="question-text" id="question">សូមចុចប៊ូតុង "សំណួរចៃដន្យ" ដើម្បីចាប់ផ្តើម!</p>
+                <p class="question-translation" id="question-translation"></p>
+            </div>
+            
+            <div class="qa-box" id="answer-box">
+                 <p class="answer-label">ចម្លើយ (Answer)</p>
+                <p class="answer-text" id="answer"></p>
+                <p class="answer-translation" id="answer-translation"></p>
+            </div>
+            
+            <div class="counter">
+                <span id="question-counter">សរុបសំណួរ: កំពុងផ្ទុក...</span>
+            </div>
+            
+            <div class="controls">
+                <div class="button-row">
+                    <button class="primary-btn" id="random-btn">
+                        <div class="khmer-and-icon">
+                            <i class="fas fa-random"></i> 
+                            <span class="khmer">សំណួរចៃដន្យ</span>
+                        </div>
+                        <div class="text-container">
+                            <span class="english">Random Question</span>
+                        </div>
+                    </button>
+                    <button class="secondary-btn" id="show-answer-btn">
+                         <div class="khmer-and-icon">
+                            <i class="fas fa-eye"></i> 
+                            <span class="khmer">បង្ហាញចម្លើយ</span>
+                        </div>
+                        <div class="text-container">
+                            <span class="english">Show Answer</span>
+                        </div>
+                    </button>
+                </div>
+                <div class="button-row">
+                    <button class="translate-btn" id="translate-btn">
+                        <div class="khmer-and-icon">
+                            <i class="fas fa-language"></i> 
+                            <span class="khmer">បកប្រែខ្មែរ</span>
+                        </div>
+                         <div class="text-container">
+                            <span class="english">Translate Khmer</span>
+                        </div>
+                    </button>
+                    <button class="voice-btn" id="speak-question-btn">
+                         <div class="khmer-and-icon">
+                            <i class="fas fa-volume-up"></i> 
+                            <span class="khmer">អានសំណួរ</span>
+                        </div>
+                         <div class="text-container">
+                            <span class="english">Read Question</span>
+                        </div>
+                    </button>
+                    <button class="voice-btn" id="speak-answer-btn">
+                         <div class="khmer-and-icon">
+                            <i class="fas fa-volume-up"></i> 
+                            <span class="khmer">អានចម្លើយ</span>
+                        </div>
+                         <div class="text-container">
+                            <span class="english">Read Answer</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><i class="fas fa-heart"></i> រៀបរៀងដោយ លោកគ្រូ ឆែម ឡាយ</p>
+        </footer>
+    </div>
+    
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // ទិន្នន័យសំណួរ (ខ្ញុំបានបន្ថែមសំណួរដែលខ្វះក្នុងកូដដែលអ្នកផ្ដល់)
+        const questions = {
+            daily: [
+                { q: "What time do you wake up?", a: "I usually wake up at 6:30 in the morning.", q_kh: "តើអ្នកភ្ញាក់ម៉ោងប៉ុន្មាន?", a_kh: "ខ្ញុំភាគច្រើនភ្ញាក់នៅម៉ោង ៦:៣០ ព្រឹក។" },
+                { q: "What do you do first after waking up?", a: "The first thing I do is drink a glass of water.", q_kh: "តើអ្នកធ្វើអ្វីជាដំបូងក្រោយពីភ្ញាក់?", a_kh: "របស់ដំបូងដែលខ្ញុំធ្វើគឺផឹកទឹកមួយកែវ។" },
+                { q: "How do you go to work or school?", a: "I usually take the bus to work.", q_kh: "តើអ្នកទៅការងារ ឬសាលាយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំភាគច្រើនជិះឡានក្រុងទៅការងារ។" },
+                { q: "What do you eat for breakfast?", a: "I usually eat cereal with milk and fruit.", q_kh: "តើអ្នកញ៉ាំអ្វីជាអាហារពេលព្រឹក?", a_kh: "ខ្ញុំភាគច្រើនញ៉ាំហ្វូងម្ហូបជាមួយទឹកដោះគោ និងផ្លែឈើ។" },
+                { q: "What time do you start work?", a: "I start work at 8:00 in the morning.", q_kh: "តើអ្នកចាប់ផ្តើមការងារម៉ោងប៉ុន្មាន?", a_kh: "ខ្ញុំចាប់ផ្តើមការងារនៅម៉ោង ៨:០០ ព្រឹក។" },
+                { q: "What do you do during lunch break?", a: "I usually eat lunch with my coworkers.", q_kh: "តើអ្នកធ្វើអ្វីក្នុងពេលសម្រាកថ្ងៃត្រង់?", a_kh: "ខ្ញុំភាគច្រើនញ៉ាំអាហារថ្ងៃត្រង់ជាមួយសហការីរបស់ខ្ញុំ។" },
+                { q: "When do you finish work?", a: "I finish work at 5:00 in the afternoon.", q_kh: "តើអ្នកបញ្ចប់ការងារពេលណា?", a_kh: "ខ្ញុំបញ្ចប់ការងារនៅម៉ោង ៥:០០ ល្ងាច។" },
+                { q: "What do you do in the evening?", a: "In the evening, I like to watch TV or read books.", q_kh: "តើអ្នកធ្វើអ្វីនៅពេលល្ងាច?", a_kh: "នៅពេលល្ងាច ខ្ញុំចូលចិត្តមើលទូរទស្សន៍ ឬអានសៀវភៅ។" },
+                { q: "What time do you go to bed?", a: "I usually go to bed at 10:30 at night.", q_kh: "តើអ្នកគេងម៉ោងប៉ុន្មាន?", a_kh: "ខ្ញុំភាគច្រើនគេងនៅម៉ោង ១០:៣០ យប់។" },
+                { q: "Do you exercise every day?", a: "Yes, I try to exercise for 30 minutes every day.", q_kh: "តើអ្នកហាត់ប្រាណរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំព្យាយាមហាត់ប្រាណ ៣០ នាទីរាល់ថ្ងៃ។" },
+                { q: "Do you cook your own meals?", a: "Yes, I cook my own dinner almost every day.", q_kh: "តើអ្នកចម្អិនអាហារដោយខ្លួនឯងឬ?", a_kh: "បាទ/ចាស ខ្ញុំចម្អិនអាហារពេលល្ងាចដោយខ្លួនឯងស្ទើរតែរាល់ថ្ងៃ។" },
+                { q: "How much time do you spend on your phone?", a: "I spend about 2 hours on my phone each day.", q_kh: "តើអ្នកប្រើពេលប៉ុន្មាននៅលើទូរស័ព្ទ?", a_kh: "ខ្ញុំប្រើពេលប្រហែល ២ ម៉ោងនៅលើទូរស័ព្ទរាល់ថ្ងៃ។" },
+                { q: "Do you read books every day?", a: "Yes, I try to read for at least 20 minutes every day.", q_kh: "តើអ្នកអានសៀវភៅរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំព្យាយាមអានយ៉ាងហោចណាស់ ២០ នាទីរាល់ថ្ងៃ។" },
+                { q: "What household chores do you do?", a: "I do the dishes, clean the floor, and wash my clothes.", q_kh: "តើអ្នកធ្វើការងារផ្ទះអ្វីខ្លះ?", a_kh: "ខ្ញុំលាងចាន សម្អាតឥដ្ឋ និងកាត់ខោអាវ។" },
+                { q: "Do you have a daily routine?", a: "Yes, I have a daily routine.", q_kh: "តើអ្នកមានទម្លាប់ប្រចាំថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំមានទម្លាប់ប្រចាំថ្ងៃ។" },
+                { q: "What do you do on weekends?", a: "On weekends, I relax, meet friends, and do my hobbies.", q_kh: "តើអ្នកធ្វើអ្វីនៅថ្ងៃចុងសប្តាហ៍?", a_kh: "នៅថ្ងៃចុងសប្តាហ៍ ខ្ញុំសម្រាក ជួបមិត្តភក្តិ និងធ្វើការកម្សាន្តរបស់ខ្ញុំ។" },
+                { q: "Do you drink coffee every day?", a: "Yes, I drink one cup of coffee every morning.", q_kh: "តើអ្នកផឹកកាហ្វេរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំផឹកកាហ្វេមួយកែវរាល់ព្រឹក។" },
+                { q: "How do you plan your day?", a: "I use a calendar on my phone to plan my day.", q_kh: "តើអ្នករៀបចំផែនការថ្ងៃរបស់អ្នកយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំប្រើប្រតិទិននៅលើទូរស័ព្ទរបស់ខ្ញុំដើម្បីរៀបចំផែនការថ្ងៃរបស់ខ្ញុំ។" },
+                { q: "Do you listen to music every day?", a: "Yes, I listen to music while working or traveling.", q_kh: "តើអ្នកស្តាប់តន្ត្រីរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំស្តាប់តន្ត្រីពេលធ្វើការ ឬធ្វើដំណើរ។" },
+                { q: "What time do you eat dinner?", a: "I usually eat dinner around 7:00 in the evening.", q_kh: "តើអ្នកញ៉ាំអាហារពេលល្ងាចម៉ោងប៉ុន្មាន?", a_kh: "ខ្ញុំភាគច្រើនញ៉ាំអាហារពេលល្ងាចប្រហែលម៉ោង ៧:០០ ល្ងាច។" },
+                { q: "Do you watch TV every day?", a: "Yes, I watch TV for about one hour every evening.", q_kh: "តើអ្នកមើលទូរទស្សន៍រាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំមើលទូរទស្សន៍ប្រហែលមួយម៉ោងរាល់ពេលល្ងាច។" },
+                { q: "Do you check your email every day?", a: "Yes, I check my email in the morning and in the evening.", q_kh: "តើអ្នកពិនិត្យអ៊ីមែលរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំពិនិត្យអ៊ីមែលរបស់ខ្ញុំនៅពេលព្រឹក និងពេលល្ងាច។" },
+                { q: "How do you relax after work?", a: "I relax by reading books or talking with friends.", q_kh: "តើអ្នកសម្រាកយ៉ាងដូចម្តេចក្រោយពេលការងារ?", a_kh: "ខ្ញុំសម្រាកដោយអានសៀវភៅ ឬនិយាយជាមួយមិត្តភក្តិ។" },
+                { q: "Do you take a shower in the morning or evening?", a: "I take a shower in the morning to feel fresh for the day.", q_kh: "តើអ្នកងូតទឹកនៅពេលព្រឹក ឬពេលល្ងាច?", a_kh: "ខ្ញុំងូតទឹកនៅពេលព្រឹកដើម្បីមានអារម្មណ៍ស្រស់ស្អាតសម្រាប់ថ្ងៃនោះ។" },
+                { q: "Do you make your bed every morning?", a: "Yes, I make my bed every morning after waking up.", q_kh: "តើអ្នករៀបគ្រែរាល់ព្រឹកឬ?", a_kh: "បាទ/ចាស ខ្ញុំរៀបគ្រែរបស់ខ្ញុំរាល់ព្រឹកក្រោយពីភ្ញាក់។" },
+                { q: "What do you usually drink during the day?", a: "I drink water, tea, and sometimes juice.", q_kh: "តើអ្នកផឹកអ្វីជាទូទៅក្នុងពេលថ្ងៃ?", a_kh: "ខ្ញុំផឹកទឹក តែ និងពេលខ្លះទឹកផ្លែឈើ។" },
+                { q: "Do you use social media every day?", a: "Yes, I use social media for about 30 minutes each day.", q_kh: "តើអ្នកប្រើប្រាស់បណ្តាញសង្គមរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំប្រើប្រាស់បណ្តាញសង្គមប្រហែល ៣០ នាទីរាល់ថ្ងៃ។" },
+                { q: "Do you write in a journal?", a: "Yes, I write in my journal every evening.", q_kh: "តើអ្នកសរសេរកំណត់ហេតុឬ?", a_kh: "បាទ/ចាស ខ្ញុំសរសេរក្នុងកំណត់ហេតុរបស់ខ្ញុំរាល់ពេលល្ងាច។" },
+                { q: "Do you meditate every day?", a: "Yes, I meditate for 10 minutes every morning.", q_kh: "តើអ្នកសមាធិរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំសមាធិ ១០ នាទីរាល់ព្រឹក។" },
+                { q: "What is your favorite part of the day?", a: "My favorite part of the day is the evening.", q_kh: "តើផ្នែកណានៃថ្ងៃដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ផ្នែកដែលខ្ញុំចូលចិត្តជាងគេនៃថ្ងៃគឺពេលល្ងាច។" },
+                { q: "Do you eat snacks during the day?", a: "Yes, I eat healthy snacks like fruits or nuts between meals.", q_kh: "តើអ្នកញ៉ាំអាហារសម្រន់ក្នុងពេលថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំញ៉ាំអាហារសម្រន់ដែលមានសុខភាពល្អដូចជាផ្លែឈើ ឬគ្រាប់ធញ្ញជាតិរវាងពេលញ៉ាំអាហារ។" },
+                { q: "How do you remember important things?", a: "I write important things in my phone notes.", q_kh: "តើអ្នកចងចាំរបស់សំខាន់ៗយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំសរសេររបស់សំខាន់ៗក្នុងកំណត់ត្រាទូរស័ព្ទរបស់ខ្ញុំ។" },
+                { q: "Do you help with cooking at home?", a: "Yes, I help with cooking dinner.", q_kh: "តើអ្នកជួយចម្អិនអាហារនៅផ្ទះឬ?", a_kh: "បាទ/ចាស ខ្ញុំជួយចម្អិនអាហារពេលល្ងាច។" },
+                { q: "What do you do before going to sleep?", a: "Before sleeping, I brush my teeth and read a book.", q_kh: "តើអ្នកធ្វើអ្វីមុនពេលគេង?", a_kh: "មុនពេលគេង ខ្ញុំដុសធ្មេញ និងអានសៀវភៅ។" },
+                { q: "Do you wake up at the same time on weekends?", a: "No, on weekends I wake up later.", q_kh: "តើអ្នកភ្ញាក់នៅពេលដូចគ្នានៅថ្ងៃចុងសប្តាហ៍ឬ?", a_kh: "ទេ នៅថ្ងៃចុងសប្តាហ៍ ខ្ញុំភ្ញាក់ក្រោយ។" },
+                { q: "How do you stay organized?", a: "I stay organized by making lists and using a calendar.", q_kh: "តើអ្នករក្សាភាពមានសណ្តាប់ធ្នាប់យ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំរក្សាភាពមានសណ្តាប់ធ្នាប់ដោយការធ្វើបញ្ជី និងប្រើប្រាស់ប្រតិទិន។" },
+                { q: "Do you take vitamins every day?", a: "Yes, I take vitamin C and D every morning.", q_kh: "តើអ្នកផឹកវីតាមីនរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំផឹកវីតាមីនស៊ី និងឌីរាល់ព្រឹក។" },
+                { q: "What is the first thing you do when you get home?", a: "The first thing I do is take off my shoes and wash my hands.", q_kh: "តើអ្វីជារបស់ដំបូងដែលអ្នកធ្វើនៅពេលអ្នកទៅដល់ផ្ទះ?", a_kh: "របស់ដំបូងដែលខ្ញុំធ្វើគឺដោះស្បែកជើង និងលាងដៃ។" },
+                { q: "Do you check the weather every day?", a: "Yes, I check the weather every morning.", q_kh: "តើអ្នកពិនិត្យអាកាសធាតុរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំពិនិត្យអាកាសធាតុរាល់ព្រឹក។" },
+                { q: "How often do you clean your house?", a: "I clean my house every weekend.", q_kh: "តើអ្នកសម្អាតផ្ទះរបស់អ្នកញឹកញាប់ប៉ុណ្ណា?", a_kh: "ខ្ញុំសម្អាតផ្ទះរបស់ខ្ញុំរាល់ចុងសប្តាហ៍។" },
+                { q: "Do you have plants in your home?", a: "Yes, I have three plants in my living room.", q_kh: "តើអ្នកមានដំណាំនៅក្នុងផ្ទះរបស់អ្នកឬ?", a_kh: "បាទ/ចាស ខ្ញុំមានដំណាំបីនៅក្នុងបន្ទប់ទទួលភ្ញៀវរបស់ខ្ញុំ។" },
+                { q: "What do you do when you have free time?", a: "When I have free time, I read books or watch movies.", q_kh: "តើអ្នកធ្វើអ្វីនៅពេលអ្នកមានពេលទំនេរ?", a_kh: "នៅពេលខ្ញុំមានពេលទំនេរ ខ្ញុំអានសៀវភៅ ឬមើលភាពយន្ត។" },
+                { q: "Do you listen to the radio?", a: "Yes, I listen to the radio in the car.", q_kh: "តើអ្នកស្តាប់វិទ្យុឬ?", a_kh: "បាទ/ចាស ខ្ញុំស្តាប់វិទ្យុក្នុងឡាន។" },
+                { q: "How do you learn new things?", a: "I learn new things by reading books and watching educational videos.", q_kh: "តើអ្នករៀនរបស់ថ្មីៗយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំរៀនរបស់ថ្មីៗដោយអានសៀវភៅ និងមើលវីដេអូអប់រំ។" },
+                { q: "Do you have a favorite time of day?", a: "My favorite time of day is early morning.", q_kh: "តើអ្នកមានពេលវេលាដែលចូលចិត្តក្នុងថ្ងៃឬ?", a_kh: "ពេលវេលាដែលខ្ញុំចូលចិត្តក្នុងថ្ងៃគឺពេលព្រឹកព្រលឹម។" },
+                { q: "What do you do when you feel tired?", a: "When I feel tired, I take a short break or drink water.", q_kh: "តើអ្នកធ្វើអ្វីនៅពេលអ្នកមានអារម្មណ៍ហត់?", a_kh: "នៅពេលខ្ញុំមានអារម្មណ៍ហត់ ខ្ញុំយកពេលសម្រាកខ្លី ឬផឹកទឹក។" },
+                { q: "Do you have breakfast with your family?", a: "Yes, I usually have breakfast with my family.", q_kh: "តើអ្នកញ៉ាំអាហារពេលព្រឹកជាមួយគ្រួសាររបស់អ្នកឬ?", a_kh: "បាទ/ចាស ខ្ញុំភាគច្រើនញ៉ាំអាហារពេលព្រឹកជាមួយគ្រួសាររបស់ខ្ញុំ។" },
+                { q: "Do you set an alarm to wake up?", a: "Yes, I set an alarm for 6:15 every morning.", q_kh: "តើអ្នកកំណត់នាឡិការោទ៍ដើម្បីភ្ញាក់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំកំណត់នាឡិការោទ៍សម្រាប់ម៉ោង ៦:១៥ រាល់ព្រឹក។" },
+                { q: "Do you prepare your clothes the night before?", a: "Yes, I prepare my clothes for the next day before sleeping.", q_kh: "តើអ្នករៀបចំខោអាវរបស់អ្នកមុនយប់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំរៀបចំខោអាវរបស់ខ្ញុំសម្រាប់ថ្ងៃបន្ទាប់មុនពេលគេង។" },
+                { q: "Do you drink enough water every day?", a: "Yes, I try to drink 8 glasses of water every day.", q_kh: "តើអ្នកផឹកទឹកគ្រប់គ្រាន់រាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំព្យាយាមផឹកទឹក ៨ កែវរាល់ថ្ងៃ។" },
+                { q: "Do you take a nap during the day?", a: "Sometimes I take a short nap after lunch if I feel tired.", q_kh: "តើអ្នកងូតទឹកក្នុងពេលថ្ងៃឬ?", a_kh: "ពេលខ្លះខ្ញុំងូតទឹកខ្លីក្រោយពេលញ៉ាំអាហារថ្ងៃត្រង់ប្រសិនបើខ្ញុំមានអារម្មណ៍ហត់។" },
+                { q: "Do you check your phone first thing in the morning?", a: "Yes, I check my phone for messages after waking up.", q_kh: "តើអ្នកពិនិត្យទូរស័ព្ទរបស់អ្នកជារបស់ដំបូងនៅពេលព្រឹកឬ?", a_kh: "បាទ/ចាស ខ្ញុំពិនិត្យទូរស័ព្ទរបស់ខ្ញុំសម្រាប់សារក្រោយពីភ្ញាក់។" },
+                { q: "Do you watch the news every day?", a: "Yes, I watch the news every evening to stay informed.", q_kh: "តើអ្នកមើលព័ត៌មានរាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំមើលព័ត៌មានរាល់ពេលល្ងាចដើម្បីទទួលបានព័ត៌មាន។" },
+                { q: "Do you go for a walk every day?", a: "Yes, I try to go for a 20-minute walk every day.", q_kh: "តើអ្នកទៅដើររាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំព្យាយាមទៅដើរ ២០ នាទីរាល់ថ្ងៃ។" }
+            ],
+            conversation: [
+                { q: "How are you today?", a: "I'm doing well, thank you for asking.", q_kh: "តើអ្នកសុខសប្បាយឬនៅថ្ងៃនេះ?", a_kh: "ខ្ញុំសុខសប្បាយ អរគុណដែលសួរ។" },
+                { q: "What did you do yesterday?", a: "Yesterday I went to the market and bought some groceries.", q_kh: "តើម្សិលមិញអ្នកបានធ្វើអ្វីខ្លះ?", a_kh: "ម្សិលមិញខ្ញុំបានទៅផ្សារ និងទិញគ្រឿងទេស។" },
+                { q: "Do you have any plans for the weekend?", a: "Yes, I plan to visit my parents on Saturday.", q_kh: "តើអ្នកមានផែនការអ្វីខ្លះសម្រាប់ចុងសប្តាហ៍?", a_kh: "បាទ/ចាស ខ្ញុំគ្រោងនឹងទៅលេងឪពុកម្តាយរបស់ខ្ញុំនៅថ្ងៃសៅរ៍។" },
+                { q: "How was your day at work?", a: "It was a busy day but I finished all my tasks.", q_kh: "តើថ្ងៃនេះអ្នកមានអារម្មណ៍យ៉ាងណានៅការងារ?", a_kh: "វាជាថ្ងៃដែលរវល់ ប៉ុន្តែខ្ញុំបានបញ្ចប់កិច្ចការទាំងអស់របស់ខ្ញុំ។" },
+                { q: "What's new in your life?", a: "I recently started learning how to cook Cambodian food.", q_kh: "តើមានអ្វីថ្មីក្នុងជីវិតរបស់អ្នក?", a_kh: "ថ្មីៗនេះ ខ្ញុំបានចាប់ផ្តើមរៀនចម្អិនអាហារខ្មែរ។" },
+                { q: "How's your family?", a: "My family is doing well, thank you for asking.", q_kh: "តើគ្រួសាររបស់អ្នកសុខសប្បាយឬ?", a_kh: "គ្រួសាររបស់ខ្ញុំសុខសប្បាយ អរគុណដែលសួរ។" },
+                { q: "Have you seen any good movies lately?", a: "Yes, I recently watched an interesting documentary.", q_kh: "តើអ្នកបានមើលភាពយន្តល្អខ្លះថ្មីៗនេះឬ?", a_kh: "បាទ/ចាស ខ្ញុំបានមើលភាពយន្តឯកសារដែលគួរអោយចាប់អារម្មណ៍ថ្មីៗនេះ។" },
+                { q: "What kind of music do you like?", a: "I enjoy listening to pop and classical music.", q_kh: "តើអ្នកចូលចិត្តតន្ត្រីប្រភេទណា?", a_kh: "ខ្ញុំចូលចិត្តស្តាប់តន្ត្រីប៉ុប និងតន្ត្រីបុរាណ។" },
+                { q: "Do you have any hobbies?", a: "Yes, I like photography and gardening.", q_kh: "តើអ្នកមានការកម្សាន្តអ្វីខ្លះ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តការថតរូប និងដាំដំណាំ។" },
+                { q: "What's your favorite book?", a: "My favorite book is 'To Kill a Mockingbird'.", q_kh: "តើសៀវភៅអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "សៀវភៅដែលខ្ញុំចូលចិត្តជាងគេគឺ 'To Kill a Mockingbird'។" },
+                { q: "Have you traveled anywhere recently?", a: "I went to Japan last month for vacation.", q_kh: "តើអ្នកបានធ្វើដំណើរទៅកន្លែងណាមួយថ្មីៗនេះឬ?", a_kh: "ខ្ញុំបានទៅប្រទេសជប៉ុនខែមុនសម្រាប់វិស្សមកាល។" },
+                { q: "What do you do for a living?", a: "I work as a software developer.", q_kh: "តើអ្នកធ្វើការអ្វី?", a_kh: "ខ្ញុំធ្វើការជាអ្នកអភិវឌ្ឍសូហ្វវែ។" },
+                { q: "Where did you grow up?", a: "I grew up in a small town in the countryside.", q_kh: "តើអ្នកធំឡើងនៅឯណា?", a_kh: "ខ្ញុំធំឡើងនៅក្នុងទីក្រុងតូចមួយនៅតាមជនបទ។" },
+                { q: "Do you have any pets?", a: "Yes, I have a dog named Max.", q_kh: "តើអ្នកមានសត្វចិញ្ចឹមឬ?", a_kh: "បាទ/ចាស ខ្ញុំមានឆ្កែមួយក្បាលឈ្មោះ Max។" },
+                { q: "What's your favorite season?", a: "I love autumn because of the beautiful colors.", q_kh: "តើរដូវណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តរដូវស្លឹកឈើជ្រុះដោយសារតែពណ៌ស្រស់ស្អាត។" },
+                { q: "Are you working on any interesting projects?", a: "Yes, I'm developing a new mobile app.", q_kh: "តើអ្នកកំពុងធ្វើគម្រោងគួរអោយចាប់អារម្មណ៍ណាមួយឬ?", a_kh: "បាទ/ចាស ខ្ញុំកំពុងអភិវឌ្ឍកម្មវិធីទូរស័ព្ទថ្មី។" },
+                { q: "What's the best thing that happened to you this week?", a: "I received positive feedback on my work project.", q_kh: "តើអ្វីដែលល្អបំផុតដែលបានកើតឡើងចំពោះអ្នកក្នុងសប្តាហ៍នេះ?", a_kh: "ខ្ញុំបានទទួលការតបស្នងវិជ្ជមានលើគម្រោងការងាររបស់ខ្ញុំ។" },
+                { q: "Do you prefer coffee or tea?", a: "I prefer coffee in the morning and tea in the afternoon.", q_kh: "តើអ្នកចូលចិត្តកាហ្វេ ឬតែ?", a_kh: "ខ្ញុំចូលចិត្តកាហ្វេនៅពេលព្រឹក និងតែនៅពេលរសៀល។" },
+                { q: "What's your favorite way to spend a weekend?", a: "I enjoy hiking and exploring new places.", q_kh: "តើរបៀបណាដែលអ្នកចូលចិត្តបំផុតក្នុងការចំណាយចុងសប្តាហ៍?", a_kh: "ខ្ញុំចូលចិត្តការឡើងភ្នំ និងស្វែងយល់ពីកន្លែងថ្មីៗ។" },
+                { q: "Have you learned anything new recently?", a: "Yes, I've been learning how to play the guitar.", q_kh: "តើអ្នកបានរៀនអ្វីថ្មីថ្មីៗនេះឬ?", a_kh: "បាទ/ចាស ខ្ញុំបានរៀនការលេងហ្គីតា។" },
+                { q: "What do you think about this weather?", a: "I love this sunny weather. It makes me feel happy.", q_kh: "តើអ្នកគិតយ៉ាងណាអំពីអាកាសធាតុនេះ?", a_kh: "ខ្ញុំចូលចិត្តអាកាសធាតុមានពន្លឺថ្ងៃនេះ។ វាធ្វើអោយខ្ញុំមានអារម្មណ៍សប្បាយចិត្ត។" },
+                { q: "Do you have any brothers or sisters?", a: "Yes, I have one older brother and one younger sister.", q_kh: "តើអ្នកមានបងប្អូនឬ?", a_kh: "បាទ/ចាស ខ្ញុំមានបងប្រុសមួយ និងនាងស្រីមួយ។" },
+                { q: "What's your favorite color?", a: "My favorite color is blue because it reminds me of the ocean.", q_kh: "តើពណ៌អ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ពណ៌ដែលខ្ញុំចូលចិត្តជាងគេគឺពណ៌ខៀវ ពីព្រោះវារំលឹកខ្ញុំពីមហាសមុទ្រ។" },
+                { q: "Do you like to read?", a: "Yes, I love reading books in my free time.", q_kh: "តើអ្នកចូលចិត្តអានឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តអានសៀវភៅនៅពេលទំនេរ។" },
+                { q: "What kind of movies do you enjoy?", a: "I enjoy comedy and action movies the most.", q_kh: "តើអ្នកចូលចិត្តភាពយន្តប្រភេទណា?", a_kh: "ខ្ញុំចូលចិត្តភាពយន្តកំប្លែង និងចលនច្រើនជាងគេ។" },
+                { q: "Have you ever been abroad?", a: "Yes, I've visited several countries in Asia.", q_kh: "តើអ្នកធ្លាប់បានទៅប្រទេសផ្សេងឬ?", a_kh: "បាទ/ចាស ខ្ញុំបានទៅលេងប្រទេសជាច្រើននៅក្នុងតំបន់អាស៊ី។" },
+                { q: "What's your dream vacation?", a: "My dream vacation would be a trip to the Maldives.", q_kh: "តើវិស្សមកាលក្តីស្រមៃរបស់អ្នកគឺអ្វី?", a_kh: "វិស្សមកាលក្តីស្រមៃរបស់ខ្ញុំនឹងជាការធ្វើដំណើរទៅកាន់ម៉ាល់ឌីវ។" },
+                { q: "Do you play any sports?", a: "Yes, I play basketball and go swimming regularly.", q_kh: "តើអ្នកលេងកីឡាអ្វីខ្លះ?", a_kh: "បាទ/ចាស ខ្ញុំលេងបាល់បោះ និងទៅហែលទឹកជាទៀងទាត់។" },
+                { q: "What's your favorite type of cuisine?", a: "I really enjoy Italian and Japanese food.", q_kh: "តើអ្នកចូលចិត្តអាហារប្រភេទណា?", a_kh: "ខ្ញុំពិតជាចូលចិត្តអាហារអ៊ីតាលី និងជប៉ុន។" },
+                { q: "Do you like to cook?", a: "Yes, I enjoy cooking new recipes on weekends.", q_kh: "តើអ្នកចូលចិត្តចម្អិនអាហារឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តចម្អិនរូបមន្តថ្មីៗនៅថ្ងៃចុងសប្តាហ៍។" },
+                { q: "What was the last book you read?", a: "The last book I read was a mystery novel.", q_kh: "តើសៀវភៅចុងក្រោយដែលអ្នកបានអានគឺអ្វី?", a_kh: "សៀវភៅចុងក្រោយដែលខ្ញុំបានអានគឺរឿងនិទានដែលគួរអោយចង់ដឹង។" },
+                { q: "Do you prefer city life or country life?", a: "I prefer city life because of the convenience and opportunities.", q_kh: "តើអ្នកចូលចិត្តជីវិតទីក្រុង ឬជីវិតជនបទ?", a_kh: "ខ្ញុំចូលចិត្តជីវិតទីក្រុងដោយសារតែភាពងាយស្រួល និងឱកាស។" },
+                { q: "What's your favorite holiday?", a: "My favorite holiday is Christmas because of the festive atmosphere.", q_kh: "តើថ្ងៃឈប់សម្រាកណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ថ្ងៃឈប់សម្រាកដែលខ្ញុំចូលចិត្តជាងគេគឺណូអែលដោយសារតែបរិយាកាសពិធីបុណ្យ។" },
+                { q: "Do you have a favorite restaurant?", a: "Yes, there's a small Italian restaurant near my house that I love.", q_kh: "តើអ្នកមានភោជនីយដ្ឋានដែលចូលចិត្តឬ?", a_kh: "បាទ/ចាស មានភោជនីយដ្ឋានអ៊ីតាលីតូចមួយនៅក្បែរផ្ទះរបស់ខ្ញុំដែលខ្ញុំចូលចិត្ត។" },
+                { q: "What do you do to relax?", a: "I listen to music or take a walk in the park to relax.", q_kh: "តើអ្នកធ្វើអ្វីដើម្បីសម្រាក?", a_kh: "ខ្ញុំស្តាប់តន្ត្រី ឬដើរនៅក្នុងសួនច្បារដើម្បីសម្រាក។" },
+                { q: "Are you a morning person or a night owl?", a: "I'm definitely a morning person. I have more energy in the morning.", q_kh: "តើអ្នកជាមនុស្សពេលព្រឹក ឬមនុស្សពេលយប់?", a_kh: "ខ្ញុំពិតជាមនុស្សពេលព្រឹក។ ខ្ញុំមានកម្លាំងចិត្តច្រើនជាងនៅពេលព្រឹក។" },
+                { q: "What's the most interesting place you've visited?", a: "The most interesting place I've visited is Angkor Wat in Cambodia.", q_kh: "តើកន្លែងណាដែលគួរអោយចាប់អារម្មណ៍បំផុតដែលអ្នកបានទៅលេង?", a_kh: "កន្លែងដែលគួរអោយចាប់អារម្មណ៍បំផុតដែលខ្ញុំបានទៅលេងគឺអង្គរវត្តនៅកម្ពុជា។" },
+                { q: "Do you like to try new foods?", a: "Yes, I love trying foods from different cultures.", q_kh: "តើអ្នកចូលចិត្តសាកល្បងអាហារថ្មីៗឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តសាកល្បងអាហារពីវប្បធម៌ផ្សេងៗ។" },
+                { q: "What's your favorite memory from childhood?", a: "My favorite childhood memory is going to the beach with my family.", q_kh: "តើការចងចាំពីវ័យកុមារដែលអ្នកចូលចិត្តជាងគេគឺអ្វី?", a_kh: "ការចងចាំពីវ័យកុមារដែលខ្ញុំចូលចិត្តជាងគេគឺការទៅឆ្នេរសមុទ្រជាមួយគ្រួសាររបស់ខ្ញុំ។" },
+                { q: "Do you enjoy shopping?", a: "Yes, I enjoy shopping for clothes and books.", q_kh: "តើអ្នកចូលចិត្តទិញឥវ៉ាន់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តទិញខោអាវ និងសៀវភៅ។" },
+                { q: "What's your favorite thing to do on a rainy day?", a: "On rainy days, I like to stay home and read a good book.", q_kh: "តើអ្វីដែលអ្នកចូលចិត្តបំផុតក្នុងការធ្វើនៅថ្ងៃភ្លៀង?", a_kh: "នៅថ្ងៃភ្លៀង ខ្ញុំចូលចិត្តនៅផ្ទះ និងអានសៀវភៅល្អ។" },
+                { q: "Do you have any goals for this year?", a: "Yes, I want to learn a new language and travel more.", q_kh: "តើអ្នកមានគោលដៅសម្រាប់ឆ្នាំនេះឬ?", a_kh: "បាទ/ចាស ខ្ញុំចង់រៀនភាសាថ្មី និងធ្វើដំណើរបន្ថែមទៀត។" },
+                { q: "What makes you happy?", a: "Spending time with my family and friends makes me happy.", q_kh: "តើអ្វីដែលធ្វើអោយអ្នកសប្បាយចិត្ត?", a_kh: "ការចំណាយពេលជាមួយគ្រួសារ និងមិត្តភក្តិរបស់ខ្ញុំធ្វើអោយខ្ញុំសប្បាយចិត្ត។" },
+                { q: "Do you prefer summer or winter?", a: "I prefer summer because I enjoy warm weather and outdoor activities.", q_kh: "តើអ្នកចូលចិត្តរដូវក្តៅ ឬរដូវរងា?", a_kh: "ខ្ញុំចូលចិត្តរដូវក្តៅដោយសារតែខ្ញុំចូលចិត្តអាកាសធាតុក្តៅ និងសកម្មភាពក្រៅផ្ទះ។" },
+                { q: "What's your favorite fruit?", a: "My favorite fruit is mango because it's sweet and juicy.", q_kh: "តើផ្លែឈើអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ផ្លែឈើដែលខ្ញុំចូលចិត្តជាងគេគឺស្វាយដោយសារតែវាផ្អែម និងមានទឹកច្រើន។" },
+                { q: "Do you like to exercise?", a: "Yes, I exercise regularly to stay healthy and fit.", q_kh: "តើអ្នកចូលចិត្តហាត់ប្រាណឬ?", a_kh: "បាទ/ចាស ខ្ញុំហាត់ប្រាណជាទៀងទាត់ដើម្បីរក្សាសុខភាព និងរូបរាងល្អ។" },
+                { q: "What's your dream job?", a: "My dream job would be working as a travel photographer.", q_kh: "តើការងារក្តីស្រមៃរបស់អ្នកគឺអ្វី?", a_kh: "ការងារក្តីស្រមៃរបស់ខ្ញុំនឹងជាការធ្វើការជាអ្នកថតរូបធ្វើដំណើរ។" },
+                { q: "Do you enjoy learning new things?", a: "Yes, I always enjoy learning new skills and gaining knowledge.", q_kh: "តើអ្នកចូលចិត្តរៀនរបស់ថ្មីៗឬ?", a_kh: "បាទ/ចាស ខ្ញុំតែងតែចូលចិត្តរៀនជំនាញថ្មីៗ និងទទួលបានចំណេះដឹង។" },
+                { q: "What's the best advice you've ever received?", a: "The best advice I've received is to always be kind to others.", q_kh: "តើដំបូន្មានដែលល្អបំផុតដែលអ្នកធ្លាប់បានទទួលគឺអ្វី?", a_kh: "ដំបូន្មានដែលល្អបំផុតដែលខ្ញុំធ្លាប់បានទទួលគឺត្រូវតែចេះអាណិតស្រឡាញ់អ្នកដទៃជានិច្ច។" }
+            ],
+            food: [
+                { q: "What's your favorite food?", a: "My favorite food is pizza because you can add different toppings.", q_kh: "តើអាហារអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "អាហារដែលខ្ញុំចូលចិត្តជាងគេគឺភីហ្សា ពីព្រោះអ្នកអាចបន្ថែមគ្រឿងផ្សំផ្សេងៗ។" },
+                { q: "Do you like to cook?", a: "Yes, I enjoy cooking new recipes in my free time.", q_kh: "តើអ្នកចូលចិត្តចម្អិនអាហារឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តចម្អិនរូបមន្តថ្មីៗនៅពេលទំនេរ។" },
+                { q: "What did you have for dinner last night?", a: "Last night I had grilled chicken with vegetables.", q_kh: "តើម្សិលមិញអ្នកញ៉ាំអ្វីជាអាហារពេលល្ងាច?", a_kh: "ម្សិលមិញខ្ញុំបានញ៉ាំសាច់មាន់អាំងជាមួយបន្លែ។" },
+                { q: "Do you prefer eating at home or at restaurants?", a: "I prefer eating at home because it's more economical.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំអាហារនៅផ្ទះ ឬនៅភោជនីយដ្ឋាន?", a_kh: "ខ្ញុំចូលចិត្តញ៉ាំអាហារនៅផ្ទះជាង ពីព្រោះវាសម្បូរបែបជាង។" },
+                { q: "What's a traditional dish from your country?", a: "A traditional dish from my country is beef lok lak.", q_kh: "តើម្ហូបប្រពៃណីអ្វីពីប្រទេសរបស់អ្នក?", a_kh: "ម្ហូបប្រពៃណីពីប្រទេសរបស់ខ្ញុំគឺសាច់គោលក់ឡក់។" },
+                { q: "Are you a vegetarian?", a: "No, I eat both meat and vegetables.", q_kh: "តើអ្នកជាអ្នកជាតិសាសន៍បួសឬ?", a_kh: "ទេ ខ្ញុំញ៉ាំទាំងសាច់ និងបន្លែ។" },
+                { q: "What's your favorite dessert?", a: "I love chocolate cake because it's rich and delicious.", q_kh: "តើបង្អែមអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តនំដូកូឡាដោយសារតែវាសម្បូរ និងឆ្ងាញ់។" },
+                { q: "Do you like spicy food?", a: "Yes, I enjoy moderately spicy food.", q_kh: "តើអ្នកចូលចិត្តអាហារហឹរឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តអាហារហឹរតិចតួច។" },
+                { q: "What's your go-to quick meal?", a: "My quick meal is pasta with tomato sauce.", q_kh: "តើអាហាររហ័សអ្វីដែលអ្នកចូលចិត្ត?", a_kh: "អាហាររហ័សរបស់ខ្ញុំគឺប៉ាស្តាជាមួយទឹកប៉េងប៉ោះ។" },
+                { q: "Do you drink coffee?", a: "Yes, I drink one cup of coffee every morning.", q_kh: "តើអ្នកផឹកកាហ្វេឬ?", a_kh: "បាទ/ចាស ខ្ញុំផឹកកាហ្វេមួយកែវរាល់ព្រឹក។" },
+                { q: "What's your favorite fruit?", a: "My favorite fruit is mango.", q_kh: "តើផ្លែឈើអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ផ្លែឈើដែលខ្ញុំចូលចិត្តជាងគេគឺស្វាយ។" },
+                { q: "Do you enjoy trying new foods?", a: "Yes, I love trying foods from different cultures.", q_kh: "តើអ្នកចូលចិត្តសាកល្បងអាហារថ្មីៗឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តសាកល្បងអាហារពីវប្បធម៌ផ្សេងៗ។" },
+                { q: "What's the most unusual food you've ever tried?", a: "The most unusual food I've tried is fried insects.", q_kh: "តើអាហារអ្វីដែលចម្លែកបំផុតដែលអ្នកធ្លាប់បានសាកល្បង?", a_kh: "អាហារដែលចម្លែកបំផុតដែលខ្ញុំធ្លាប់បានសាកល្បងគឺសត្វល្អិតចៀន។" },
+                { q: "Do you have any food allergies?", a: "No, I don't have any food allergies.", q_kh: "តើអ្នកមានអាឡែសីអាហារអ្វីខ្លះឬ?", a_kh: "ទេ ខ្ញុំមិនមានអាឡែសីអាហារអ្វីទេ។" },
+                { q: "What's your favorite cuisine?", a: "I really enjoy Italian cuisine.", q_kh: "តើអ្នកចូលចិត្តអាហារប្រភេទណា?", a_kh: "ខ្ញុំពិតជាចូលចិត្តអាហារអ៊ីតាលី។" },
+                { q: "How often do you eat out?", a: "I eat out about twice a week.", q_kh: "តើអ្នកញ៉ាំអាហារខាងក្រៅញឹកញាប់ប៉ុណ្ណា?", a_kh: "ខ្ញុំញ៉ាំអាហារខាងក្រៅប្រហែលពីរដងក្នុងមួយសប្តាហ៍។" },
+                { q: "Do you like seafood?", a: "Yes, I enjoy most types of seafood.", q_kh: "តើអ្នកចូលចិត្តអាហារសមុទ្រឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តអាហារសមុទ្រភាគច្រើន។" },
+                { q: "What's your favorite breakfast food?", a: "I love pancakes with maple syrup.", q_kh: "តើអាហារពេលព្រឹកអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តនំផេនគេកជាមួយសុរាម៉េបផល។" },
+                { q: "Do you enjoy baking?", a: "Yes, I enjoy baking cookies and cakes.", q_kh: "តើអ្នកចូលចិត្តដុតនំឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តដុតនំខូគី និងនំកេក។" },
+                { q: "What's your favorite snack?", a: "My favorite snack is yogurt with nuts.", q_kh: "តើអាហារសម្រន់អ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "អាហារសម្រន់ដែលខ្ញុំចូលចិត្តជាងគេគឺយ៉ាហ្គួរធីជាមួយគ្រាប់ធញ្ញជាតិ។" },
+                { q: "Do you like to eat salad?", a: "Yes, I enjoy fresh salads with lots of vegetables.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំសាឡាតឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តសាឡាតស្រស់ជាមួយបន្លែច្រើន។" },
+                { q: "What's your favorite drink?", a: "My favorite drink is fresh orange juice.", q_kh: "តើភេសជ្ជៈអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ភេសជ្ជៈដែលខ្ញុំចូលចិត្តជាងគេគឺទឹកក្រូចឆ្មារស្រស់។" },
+                { q: "Do you like to eat soup?", a: "Yes, I enjoy different kinds of soup, especially in cold weather.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំស៊ុបឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តស៊ុបប្រភេទផ្សេងៗ ជាពិសេសនៅពេលអាកាសធាតុត្រជាក់។" },
+                { q: "What's your favorite vegetable?", a: "My favorite vegetable is broccoli.", q_kh: "តើបន្លែអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "បន្លែដែលខ្ញុំចូលចិត្តជាងគេគឺប្រ៊កខូលី។" },
+                { q: "Do you enjoy eating rice?", a: "Yes, I eat rice almost every day with my meals.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំបាយឬ?", a_kh: "បាទ/ចាស ខ្ញុំញ៉ាំបាយស្ទើរតែរាល់ថ្ងៃជាមួយអាហាររបស់ខ្ញុំ។" },
+                { q: "What's your favorite type of bread?", a: "I love whole wheat bread because it's healthy.", q_kh: "តើនំប៉័ងប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តនំប៉័ងស្រូវសាលីពីព្រោះវាមានសុខភាពល្អ។" },
+                { q: "Do you like to eat eggs?", a: "Yes, I eat eggs for breakfast several times a week.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំស៊ុតឬ?", a_kh: "បាទ/ចាស ខ្ញុំញ៉ាំស៊ុតជាអាហារពេលព្រឹកច្រើនដងក្នុងមួយសប្តាហ៍។" },
+                { q: "What's your favorite way to cook potatoes?", a: "I love roasted potatoes with herbs.", q_kh: "តើរបៀបណាដែលអ្នកចូលចិត្តបំផុតក្នុងការចម្អិនដំឡូង?", a_kh: "ខ្ញុំចូលចិត្តដំឡូងបំពងជាមួយជីរឈើ។" },
+                { q: "Do you enjoy eating noodles?", a: "Yes, I love different types of noodles like pasta and ramen.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំមីឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តមីប្រភេទផ្សេងៗដូចជាប៉ាស្តា និងរ៉ាមែន។" },
+                { q: "What's your favorite cheese?", a: "I love mozzarella cheese on pizza.", q_kh: "តើឈីហ្សាអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តឈីហ្សាម៉ូសសារ៉េលឡាលើភីហ្សា។" },
+                { q: "Do you like to eat sandwiches?", a: "Yes, I enjoy making different kinds of sandwiches for lunch.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំនំសាំងវិចឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តធ្វើនំសាំងវិចប្រភេទផ្សេងៗសម្រាប់អាហារថ្ងៃត្រង់។" },
+                { q: "What's your favorite type of meat?", a: "I enjoy chicken because it's versatile and healthy.", q_kh: "តើសាច់ប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តសាច់មាន់ពីព្រោះវាអាចប្រែប្រួលបានច្រើន និងមានសុខភាពល្អ។" },
+                { q: "Do you like to eat fish?", a: "Yes, I enjoy grilled fish with lemon.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំត្រីឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តត្រីអាំងជាមួយក្រូចឆ្មារ។" },
+                { q: "What's your favorite way to prepare vegetables?", a: "I love stir-fried vegetables with garlic.", q_kh: "តើរបៀបណាដែលអ្នកចូលចិត្តបំផុតក្នុងការរៀបចំបន្លែ?", a_kh: "ខ្ញុំចូលចិត្តបន្លែចៀនជាមួយខ្ទឹមស។" },
+                { q: "Do you enjoy eating fruits?", a: "Yes, I eat fruits every day as snacks or dessert.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំផ្លែឈើឬ?", a_kh: "បាទ/ចាស ខ្ញុំញ៉ាំផ្លែឈើរាល់ថ្ងៃជាអាហារសម្រន់ ឬបង្អែម។" },
+                { q: "What's your favorite type of ice cream?", a: "I love chocolate chip ice cream.", q_kh: "តើការ៉េមប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តការ៉េមដូកូឡាឈីប។" },
+                { q: "Do you like to eat pizza?", a: "Yes, pizza is one of my favorite foods.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំភីហ្សាឬ?", a_kh: "បាទ/ចាស ភីហ្សាគឺជាអាហារដែលខ្ញុំចូលចិត្តមួយ។" },
+                { q: "What's your favorite type of sauce?", a: "I love tomato sauce with pasta.", q_kh: "តើទឹកជ្រលក់ប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តទឹកប៉េងប៉ោះជាមួយប៉ាស្តា។" },
+                { q: "Do you enjoy eating burgers?", a: "Yes, I enjoy a good burger occasionally.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំហប៊ឺហ្គឺឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តហប៊ឺហ្គឺល្អម្តងម្កាល។" },
+                { q: "What's your favorite type of cake?", a: "I love chocolate cake with vanilla icing.", q_kh: "តើនំកេកប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តនំដូកូឡាជាមួយក្រែមវ៉ានីឡា។" },
+                { q: "Do you like to eat sushi?", a: "Yes, I enjoy sushi, especially salmon sushi.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំស៊ូស៊ីឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តស៊ូស៊ី ជាពិសេសស៊ូស៊ីសាលម៉ុន។" },
+                { q: "What's your favorite type of soup?", a: "I love chicken noodle soup when I'm sick.", q_kh: "តើស៊ុបប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តស៊ុបមីសាច់មាន់នៅពេលខ្ញុំឈឺ។" },
+                { q: "Do you enjoy eating tacos?", a: "Yes, I love tacos with beef and vegetables.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំតាកូឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តតាកូជាមួយសាច់គោ និងបន្លែ។" },
+                { q: "What's your favorite type of pasta?", a: "I love spaghetti with meatballs.", q_kh: "តើប៉ាស្តាប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តស្ប៉ាកេទីជាមួយបាល់សាច់។" },
+                { q: "Do you like to eat salad?", a: "Yes, I enjoy fresh green salads with vinaigrette dressing.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំសាឡាតឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តសាឡាតបៃតងស្រស់ជាមួយទឹកជ្រលក់វីណេក្រេត។" },
+                { q: "What's your favorite type of rice dish?", a: "I love fried rice with vegetables and egg.", q_kh: "តើម្ហូបបាយប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តបាយឆាជាមួយបន្លែ និងស៊ុត។" },
+                { q: "Do you enjoy eating dumplings?", a: "Yes, I love steamed dumplings with dipping sauce.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំនំបញ្ចុកឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តនំបញ្ចុកចំហុយជាមួយទឹកជ្រលក់។" },
+                { q: "What's your favorite type of sandwich?", a: "I love turkey sandwiches with lettuce and tomato.", q_kh: "តើនំសាំងវិចប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តនំសាំងវិចសាច់ទីជាមួយសាឡាត និងប៉េងប៉ោះ។" },
+                { q: "Do you like to eat pancakes?", a: "Yes, I enjoy pancakes with maple syrup for breakfast.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំនំផេនគេកឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តនំផេនគេកជាមួយសុរាម៉េបផលសម្រាប់អាហារពេលព្រឹក។" },
+                { q: "What's your favorite type of cookie?", a: "I love chocolate chip cookies.", q_kh: "តើនំខូគីប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តនំខូគីដូកូឡាឈីប។" },
+                { q: "Do you enjoy eating steak?", a: "Yes, I enjoy a good steak with mashed potatoes.", q_kh: "តើអ្នកចូលចិត្តញ៉ាំស្តេកឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តស្តេកល្អជាមួយដំឡូងមីម៉ាល់។" }
+            ],
+            travel: [
+                { q: "Do you like to travel?", a: "Yes, I love traveling to new places.", q_kh: "តើអ្នកចូលចិត្តធ្វើដំណើរឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តធ្វើដំណើរទៅកន្លែងថ្មីៗ។" },
+                { q: "What's your favorite place you've visited?", a: "My favorite place is Paris, France.", q_kh: "តើកន្លែងណាដែលអ្នកចូលចិត្តជាងគេដែលអ្នកបានទៅលេង?", a_kh: "កន្លែងដែលខ្ញុំចូលចិត្តជាងគេគឺទីក្រុងប៉ារីស ប្រទេសបារាំង។" },
+                { q: "Where would you like to travel next?", a: "I'd like to visit Japan next.", q_kh: "តើអ្នកចង់ទៅធ្វើដំណើរទៅកន្លែងណាបន្ទាប់?", a_kh: "ខ្ញុំចង់ទៅលេងប្រទេសជប៉ុនបន្ទាប់។" },
+                { q: "Do you prefer beaches or mountains?", a: "I prefer mountains for hiking and scenery.", q_kh: "តើអ្នកចូលចិត្តឆ្នេរសមុទ្រ ឬភ្នំ?", a_kh: "ខ្ញុំចូលចិត្តភ្នំសម្រាប់ការឡើងភ្នំ និងទេសភាព។" },
+                { q: "What's the most interesting city you've visited?", a: "The most interesting city I've visited is Tokyo.", q_kh: "តើទីក្រុងណាដែលគួរអោយចាប់អារម្មណ៍បំផុតដែលអ្នកបានទៅលេង?", a_kh: "ទីក្រុងដែលគួរអោយចាប់អារម្មណ៍បំផុតដែលខ្ញុំបានទៅលេងគឺទីក្រុងតូក្យូ។" },
+                { q: "Do you prefer traveling alone or with others?", a: "I prefer traveling with friends or family.", q_kh: "តើអ្នកចូលចិត្តធ្វើដំណើរតែម្នាក់ឯង ឬជាមួយអ្នកដទៃ?", a_kh: "ខ្ញុំចូលចិត្តធ្វើដំណើរជាមួយមិត្តភក្តិ ឬគ្រួសារ។" },
+                { q: "What's your favorite mode of transportation when traveling?", a: "I enjoy train travel for the views.", q_kh: "តើមធ្យោបាយធ្វើដំណើរអ្វីដែលអ្នកចូលចិត្តជាងគេពេលធ្វើដំណើរ?", a_kh: "ខ្ញុំចូលចិត្តការធ្វើដំណើរតាមផ្លូវដែកដោយសារតែទេសភាព។" },
+                { q: "Do you like to plan your trips in detail or be spontaneous?", a: "I like to have a basic plan but leave room for spontaneity.", q_kh: "តើអ្នកចូលចិត្តធ្វើផែនការដំណើររបស់អ្នកយ៉ាងលម្អិត ឬធ្វើតាមស្ថានភាព?", a_kh: "ខ្ញុំចូលចិត្តមានផែនការមូលដ្ឋាន ប៉ុន្តែទុកកន្លែងសម្រាប់ការធ្វើតាមស្ថានភាព។" },
+                { q: "What's the longest trip you've taken?", a: "The longest trip was three weeks in Europe.", q_kh: "តើដំណើរណាដែលវែងបំផុតដែលអ្នកបានធ្វើ?", a_kh: "ដំណើរដែលវែងបំផុតគឺបីសប្តាហ៍នៅទ្វីបអឺរ៉ុប។" },
+                { q: "Do you prefer domestic or international travel?", a: "I enjoy both, but international travel is more exciting.", q_kh: "តើអ្នកចូលចិត្តធ្វើដំណើរក្នុងប្រទេស ឬក្រៅប្រទេស?", a_kh: "ខ្ញុំចូលចិត្តទាំងពីរ ប៉ុន្តែការធ្វើដំណើរក្រៅប្រទេសគួរអោយរំភើបជាង។" },
+                { q: "What's your must-have travel item?", a: "My must-have item is a good camera.", q_kh: "តើឥវ៉ាន់អ្វីដែលអ្នកត្រូវកាន់យកទៅផ្ទាល់ពេលធ្វើដំណើរ?", a_kh: "ឥវ៉ាន់ដែលខ្ញុំត្រូវកាន់យកទៅផ្ទាល់គឺកាមេរ៉ាល្អ។" },
+                { q: "Do you collect souvenirs when you travel?", a: "Yes, I like to collect small items as memories.", q_kh: "តើអ្នកប្រមូលរបស់ចងចាំពេលធ្វើដំណើរឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តប្រមូលឥវ៉ាន់តូចៗជាការចងចាំ។" },
+                { q: "What's the best travel advice you've received?", a: "The best advice is to pack light.", q_kh: "តើដំបូន្មានធ្វើដំណើរដែលល្អបំផុតដែលអ្នកបានទទួលគឺអ្វី?", a_kh: "ដំបូន្មានដែលល្អបំផុតគឺដាក់ឥវ៉ាន់តិចៗ។" },
+                { q: "Have you ever had any travel mishaps?", a: "Yes, I once missed a flight due to traffic.", q_kh: "តើអ្នកធ្លាប់មានបញ្ហាអ្វីខ្លះក្នុងពេលធ្វើដំណើរ?", a_kh: "បាទ/ចាស ខ្ញុំធ្លាប់ខកជើងហោះហើរដោយសារតែចរាចរណ៍។" },
+                { q: "Do you prefer city trips or nature getaways?", a: "I enjoy a mix of both.", q_kh: "តើអ្នកចូលចិត្តដំណើរទៅទីក្រុង ឬទៅធម្មជាតិ?", a_kh: "ខ្ញុំចូលចិត្តលាយឡំទាំងពីរ។" },
+                { q: "What's your dream destination?", a: "My dream destination is New Zealand.", q_kh: "តើកន្លែងក្តីស្រមៃរបស់អ្នកគឺអ្វី?", a_kh: "កន្លែងក្តីស្រមៃរបស់ខ្ញុំគឺនូវែលសែល។" },
+                { q: "Do you like trying local foods when traveling?", a: "Yes, trying local cuisine is one of my favorite parts of traveling.", q_kh: "តើអ្នកចូលចិត្តសាកល្បងអាហារមូលដ្ឋានពេលធ្វើដំណើរឬ?", a_kh: "បាទ/ចាស ការសាកល្បងអាហារមូលដ្ឋានគឺជាផ្នែកមួយដែលខ្ញុំចូលចិត្តបំផុតក្នុងការធ្វើដំណើរ។" },
+                { q: "What's the most beautiful place you've seen?", a: "The most beautiful place was the Norwegian fjords.", q_kh: "តើកន្លែងណាដែលស្រស់ស្អាតបំផុតដែលអ្នកបានឃើញ?", a_kh: "កន្លែងដែលស្រស់ស្អាតបំផុតគឺហ្វៀរដនៅន័រវេស។" },
+                { q: "Do you prefer short trips or long vacations?", a: "I prefer longer vacations to fully experience a place.", q_kh: "តើអ្នកចូលចិត្តដំណើរខ្លី ឬវិស្សមកាលវែង?", a_kh: "ខ្ញុំចូលចិត្តវិស្សមកាលវែងជាងដើម្បីបទពិសោធន៍កន្លែងនោះឱ្យបានពេញលេញ។" },
+                { q: "What's your favorite travel memory?", a: "My favorite memory is watching the sunrise over Angkor Wat.", q_kh: "តើការចងចាំធ្វើដំណើរអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ការចងចាំដែលខ្ញុំចូលចិត្តជាងគេគឺការមើលព្រះអាទិត្យរះលើអង្គរវត្ត។" },
+                { q: "Do you enjoy adventure travel?", a: "Yes, I enjoy hiking and exploring nature.", q_kh: "តើអ្នកចូលចិត្តការធ្វើដំណើរផ្សងព្រេងឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តការឡើងភ្នំ និងស្វែងយល់ពីធម្មជាតិ។" },
+                { q: "What's the most crowded place you've visited?", a: "The most crowded place was Times Square in New York.", q_kh: "តើកន្លែងណាដែលកុះករបំផុតដែលអ្នកបានទៅលេង?", a_kh: "កន្លែងដែលកុះករបំផុតគឺទីធ្លាតាមស្កែរនៅនូវ៉័រក។" },
+                { q: "Do you prefer hot or cold destinations?", a: "I prefer mild temperatures, not too hot or too cold.", q_kh: "តើអ្នកចូលចិត្តកន្លែងក្តៅ ឬត្រជាក់?", a_kh: "ខ្ញុំចូលចិត្តសីតុណ្ហភាពមធ្យម មិនក្តៅពេក ឬត្រជាក់ពេក។" },
+                { q: "What's the most exotic place you've been to?", a: "The most exotic place was Bali, Indonesia.", q_kh: "តើកន្លែងណាដែលចម្លែកបំផុតដែលអ្នកបានទៅ?", a_kh: "កន្លែងដែលចម្លែកបំផុតគឺបាលី ឥណ្ឌូនេស៊ី។" },
+                { q: "Do you enjoy cultural experiences when traveling?", a: "Yes, I love learning about local cultures and traditions.", q_kh: "តើអ្នកចូលចិត្តបទពិសោធន៍វប្បធម៌ពេលធ្វើដំណើរឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តរៀនអំពីវប្បធម៌ និងប្រពៃណីមូលដ្ឋាន។" },
+                { q: "What's your favorite type of accommodation?", a: "I prefer comfortable hotels with good locations.", q_kh: "តើកន្លែងស្នាក់នៅប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តសណ្ឋាគារដែលស្រួលជាមួយទីតាំងល្អ។" },
+                { q: "Do you take many photos when traveling?", a: "Yes, I take lots of photos to remember my trips.", q_kh: "តើអ្នកថតរូបច្រើនពេលធ្វើដំណើរឬ?", a_kh: "បាទ/ចាស ខ្ញុំថតរូបច្រើនដើម្បីចងចាំដំណើររបស់ខ្ញុំ។" },
+                { q: "What's the most challenging trip you've taken?", a: "The most challenging was a hiking trip in the mountains.", q_kh: "តើដំណើរណាដែលលំបាកបំផុតដែលអ្នកបានធ្វើ?", a_kh: "ដំណើរដែលលំបាកបំផុតគឺដំណើរឡើងភ្នំនៅលើភ្នំ។" },
+                { q: "Do you prefer guided tours or independent travel?", a: "I prefer independent travel for more flexibility.", q_kh: "តើអ្នកចូលចិត្តដំណើរកំសាន្តដែលមានអ្នកណែនាំ ឬដំណើរឯករាជ្យ?", a_kh: "ខ្ញុំចូលចិត្តដំណើរឯករាជ្យដើម្បីមានភាព灵活ជាង។" },
+                { q: "What's the most remote place you've visited?", a: "The most remote place was a small village in the mountains.", q_kh: "តើកន្លែងណាដែលដាច់ស្រយាលបំផុតដែលអ្នកបានទៅលេង?", a_kh: "កន្លែងដែលដាច់ស្រយាលបំផុតគឺភូមិតូចមួយនៅលើភ្នំ។" },
+                { q: "Do you enjoy beach vacations?", a: "Yes, I love relaxing on beautiful beaches.", q_kh: "តើអ្នកចូលចិត្តវិស្សមកាលនៅឆ្នេរសមុទ្រឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តសម្រាកនៅលើឆ្នេរសមុទ្រដ៏ស្រស់ស្អាត។" },
+                { q: "What's your favorite travel season?", a: "I prefer traveling in spring when the weather is mild.", q_kh: "តើរដូវធ្វើដំណើរណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តធ្វើដំណើរនៅរដូវផ្ការីកពេលដែលអាកាសធាតុមធ្យម។" },
+                { q: "Do you use travel apps?", a: "Yes, I use apps for booking and navigation.", q_kh: "តើអ្នកប្រើកម្មវិធីធ្វើដំណើរឬ?", a_kh: "បាទ/ចាស ខ្ញុំប្រើកម្មវិធីសម្រាប់ការកក់ និងការណែនាំផ្លូវ។" },
+                { q: "What's the most expensive trip you've taken?", a: "The most expensive was a two-week trip to Europe.", q_kh: "តើដំណើរណាដែលថ្លៃបំផុតដែលអ្នកបានធ្វើ?", a_kh: "ដំណើរដែលថ្លៃបំផុតគឺដំណើរពីរសប្តាហ៍ទៅទ្វីបអឺរ៉ុប។" },
+                { q: "Do you prefer relaxing or active vacations?", a: "I enjoy a balance of both relaxation and activities.", q_kh: "តើអ្នកចូលចិត្តវិស្សមកាលសម្រាក ឬសកម្ម?", a_kh: "ខ្ញុំចូលចិត្តតុល្យភាពទាំងការសម្រាក និងសកម្មភាព។" },
+                { q: "What's your favorite travel book?", a: "I enjoy reading travel guides before my trips.", q_kh: "តើសៀវភៅធ្វើដំណើរអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តអានការណែនាំធ្វើដំណើរមុនពេលធ្វើដំណើរ។" },
+                { q: "Do you enjoy road trips?", a: "Yes, I love exploring new places by car.", q_kh: "តើអ្នកចូលចិត្តដំណើរតាមផ្លូវឬ?", a_kkh: "បាទ/ចាស ខ្ញុំចូលចិត្តស្វែងយល់ពីកន្លែងថ្មីៗតាមរយៈឡាន។" },
+                { q: "What's the most beautiful sunset you've seen?", a: "The most beautiful sunset was in Santorini, Greece.", q_kh: "តើព្រះអាទិត្យលិចដ៏ស្រស់ស្អាតបំផុតដែលអ្នកបានឃើញគឺនៅឯណា?", a_kh: "ព្រះអាទិត្យលិចដ៏ស្រស់ស្អាតបំផុតគឺនៅសាន់តូរីនី ប្រទេសក្រិក។" },
+                { q: "Do you prefer traveling by plane or train?", a: "I prefer trains for shorter distances and planes for long trips.", q_kh: "តើអ្នកចូលចិត្តធ្វើដំណើរតាមយន្តហោះ ឬរថភ្លើង?", a_kh: "ខ្ញុំចូលចិត្តរថភ្លើងសម្រាប់ចម្ងាយខ្លី និងយន្តហោះសម្រាប់ដំណើរវែង។" },
+                { q: "What's your favorite travel memory from childhood?", a: "My favorite childhood travel memory is going to the beach with my family.", q_kh: "តើការចងចាំធ្វើដំណើរពីវ័យកុមារដែលអ្នកចូលចិត្តជាងគេគឺអ្វី?", a_kh: "ការចងចាំធ្វើដំណើរពីវ័យកុមារដែលខ្ញុំចូលចិត្តជាងគេគឺការទៅឆ្នេរសមុទ្រជាមួយគ្រួសាររបស់ខ្ញុំ។" },
+                { q: "Do you enjoy visiting historical sites?", a: "Yes, I love learning about history through visiting historical places.", q_kh: "តើអ្នកចូលចិត្តទៅលេងទីតាំងប្រវត្តិសាស្ត្រឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តរៀនអំពីប្រវត្តិសាស្ត្រតាមរយៈការទៅលេងកន្លែងប្រវត្តិសាស្ត្រ។" },
+                { q: "What's the most unique accommodation you've stayed in?", a: "The most unique was a treehouse in the forest.", q_kh: "តើកន្លែងស្នាក់នៅណាដែលពិសេសបំផុតដែលអ្នកធ្លាប់បានស្នាក់នៅ?", a_kh: "កន្លែងស្នាក់នៅដែលពិសេសបំផុតគឺផ្ទះឈើនៅក្នុងព្រៃ។" },
+                { q: "Do you prefer traveling to familiar places or new destinations?", a: "I enjoy both, but I love discovering new places.", q_kh: "តើអ្នកចូលចិត្តធ្វើដំណើរទៅកន្លែងដែលធ្លាប់ស្គាល់ ឬទិសដៅថ្មី?", a_kh: "ខ្ញុំចូលចិត្តទាំងពីរ ប៉ុន្តែខ្ញុំចូលចិត្តរកឃើញកន្លែងថ្មីៗ។" },
+                { q: "What's your favorite travel podcast or blog?", a: "I enjoy several travel blogs that share personal experiences.", q_kh: "តើការផ្សាយឬប្លុកធ្វើដំណើរអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តប្លុកធ្វើដំណើរជាច្រើនដែលចែករំលែកបទពិសោធន៍ផ្ទាល់ខ្លួន។" },
+                { q: "Do you enjoy traveling during holidays?", a: "I prefer traveling during off-peak seasons to avoid crowds.", q_kh: "តើអ្នកចូលចិត្តធ្វើដំណើរក្នុងឱកាសថ្ងៃឈប់សម្រាកឬ?", a_kh: "ខ្ញុំចូលចិត្តធ្វើដំណើរក្នុងរដូវកំសាន្តដើម្បីជៀសវាងការកុះករ។" },
+                { q: "What's the most helpful travel tip you can share?", a: "The most helpful tip is to always have copies of important documents.", q_kh: "តើគន្លឹះធ្វើដំណើរដែលមានប្រយោជន៍បំផុតដែលអ្នកអាចចែករំលែកគឺអ្វី?", a_kh: "គន្លឹះដែលមានប្រយោជន៍បំផុតគឺត្រូវតែមានច្បាប់ចម្លងនៃឯកសារសំខាន់ៗជានិច្ច។" },
+                { q: "Do you enjoy learning basic phrases in local languages?", a: "Yes, I think it's respectful and helpful to learn a few phrases.", q_kh: "តើអ្នកចូលចិត្តរៀនឃ្លាមូលដ្ឋានក្នុងភាសាមូលដ្ឋានឬ?", a_kh: "បាទ/ចាស ខ្ញុំគិតថាវាគួរអោយគោរព និងមានប្រយោជន៍ក្នុងការរៀនឃ្លាមួយចំនួន។" },
+                { q: "What's your favorite travel souvenir?", a: "My favorite souvenir is a small painting I bought in Paris.", q_kh: "តើរបស់ចងចាំធ្វើដំណើរអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "របស់ចងចាំធ្វើដំណើរដែលខ្ញុំចូលចិត្តជាងគេគឺរូបគំនូរតូចមួយដែលខ្ញុំបានទិញនៅប៉ារីស។" }
+            ],
+            shopping: [
+                { q: "Do you enjoy shopping?", a: "Yes, I enjoy shopping for clothes and gadgets.", q_kh: "តើអ្នកចូលចិត្តទិញឥវ៉ាន់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តទិញខោអាវ និងគ្រឿងអេឡិចត្រូនិក។" },
+                { q: "What's your favorite store?", a: "My favorite store is a local bookstore.", q_kh: "តើហាងអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ហាងដែលខ្ញុំចូលចិត្តជាងគេគឺហាងសៀវភៅមូលដ្ឋាន។" },
+                { q: "Do you prefer shopping online or in physical stores?", a: "I prefer online shopping for convenience.", q_kh: "តើអ្នកចូលចិត្តទិញតាមអ៊ីនធឺណិត ឬនៅហាងពិត?", a_kh: "ខ្ញុំចូលចិត្តទិញតាមអ៊ីនធឺណិតដើម្បីភាពងាយស្រួល។" },
+                { q: "What was the last thing you bought?", a: "The last thing I bought was a new pair of shoes.", q_kh: "តើឥវ៉ាន់ចុងក្រោយដែលអ្នកបានទិញគឺអ្វី?", a_kh: "ឥវ៉ាន់ចុងក្រោយដែលខ្ញុំបានទិញគឺស្បែកជើងថ្មីមួយគូ។" },
+                { q: "Do you often buy things on sale?", a: "Yes, I try to wait for sales to save money.", q_kh: "តើអ្នកច្រើនទិញឥវ៉ាន់នៅពេលកំពុងលក់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំព្យាយាមរង់ចាំការលក់ដើម្បីសន្សំប្រាក់។" },
+                { q: "What do you usually shop for?", a: "I usually shop for clothes, books, and electronics.", q_kh: "តើអ្នកភាគច្រើនទិញអ្វី?", a_kh: "ខ្ញុំភាគច្រើនទិញខោអាវ សៀវភៅ និងគ្រឿងអេឡិចត្រូនិក។" },
+                { q: "Do you enjoy window shopping?", a: "Yes, I find window shopping relaxing.", q_kh: "តើអ្នកចូលចិត្តការមើលតាមវិនដូឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញការមើលតាមវិនដូធ្វើអោយសម្រាក។" },
+                { q: "How often do you go grocery shopping?", a: "I go grocery shopping once a week.", q_kh: "តើអ្នកទៅទិញគ្រឿងទេសញឹកញាប់ប៉ុណ្ណា?", a_kh: "ខ្ញុំទៅទិញគ្រឿងទេសម្តងក្នុងមួយសប្តាហ៍។" },
+                { q: "Do you use shopping lists?", a: "Yes, I always make a list to stay organized.", q_kh: "តើអ្នកប្រើបញ្ជីទិញឥវ៉ាន់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំតែងតែធ្វើបញ្ជីដើម្បីរក្សាភាពមានសណ្តាប់ធ្នាប់។" },
+                { q: "What's your favorite thing to shop for?", a: "My favorite thing to shop for is books.", q_kh: "តើអ្វីដែលអ្នកចូលចិត្តបំផុតក្នុងការទិញ?", a_kh: "របស់ដែលខ្ញុំចូលចិត្តបំផុតក្នុងការទិញគឺសៀវភៅ។" },
+                { q: "Do you compare prices before buying?", a: "Yes, I usually compare prices online before making a purchase.", q_kh: "តើអ្នកប្រៀបធៀបតម្លៃមុនពេលទិញឬ?", a_kh: "បាទ/ចាស ខ្ញុំភាគច្រើនប្រៀបធៀបតម្លៃតាមអ៊ីនធឺណិតមុនពេលធ្វើការទិញ។" },
+                { q: "Have you ever returned something you bought?", a: "Yes, I've returned items that didn't fit properly.", q_kh: "តើអ្នកធ្លាប់បានប្រគល់ត្រឡប់ឥវ៉ាន់ដែលអ្នកបានទិញឬ?", a_kh: "បាទ/ចាស ខ្ញុំធ្លាប់បានប្រគល់ត្រឡប់ឥវ៉ាន់ដែលមិនសមក្នុងការពាក់។" },
+                { q: "Do you enjoy shopping for gifts?", a: "Yes, I enjoy finding the perfect gift for someone.", q_kh: "តើអ្នកចូលចិត្តទិញអំណោយឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តរកឃើញអំណោយដ៏ល្អឥតខ្ចោះសម្រាប់នរណាម្នាក់។" },
+                { q: "What's the most expensive thing you've ever bought?", a: "The most expensive thing was my laptop.", q_kh: "តើឥវ៉ាន់អ្វីដែលថ្លៃបំផុតដែលអ្នកធ្លាប់បានទិញ?", a_kh: "ឥវ៉ាន់ដែលថ្លៃបំផុតគឺកំព្យូទ័រយួរដៃរបស់ខ្ញុំ។" },
+                { q: "Do you prefer shopping alone or with friends?", a: "I prefer shopping alone for efficiency.", q_kh: "តើអ្នកចូលចិត្តទិញតែម្នាក់ឯង ឬជាមួយមិត្តភក្តិ?", a_kh: "ខ្ញុំចូលចិត្តទិញតែម្នាក់ឯងដើម្បីប្រសិទ្ធភាព។" },
+                { q: "How do you decide what to buy?", a: "I consider quality, price, and whether I really need it.", q_kh: "តើអ្នកសម្រេចចិត្តថាតើត្រូវទិញអ្វីយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំពិចារណាអំពីគុណភាព តម្លៃ និងថាតើខ្ញុំត្រូវការវាពិតប្រាកដឬទេ។" },
+                { q: "Do you enjoy bargaining?", a: "I'm not very good at bargaining, but I try sometimes.", q_kh: "តើអ្នកចូលចិត្តការដេញថ្លៃឬ?", a_kh: "ខ្ញុំមិនសូវចេះដេញថ្លៃទេ ប៉ុន្តែខ្ញុំព្យាយាមពេលខ្លះ។" },
+                { q: "What's your impulse buy weakness?", a: "My weakness is books - I often buy them impulsively.", q_kh: "តើចំណុចទន់ខ្សោរបស់អ្នកក្នុងការទិញតាមភាពងាយស្រួលគឺអ្វី?", a_kh: "ចំណុចទន់ខ្សោរបស់ខ្ញុំគឺសៀវភៅ - ខ្ញុំច្រើនទិញវាតាមភាពងាយស្រួល។" },
+                { q: "Do you read product reviews before buying?", a: "Yes, I always read reviews before making significant purchases.", q_kh: "តើអ្នកអានការពិនិត្យឡើងវិញនៃផលិតផលមុនពេលទិញឬ?", a_kh: "បាទ/ចាស ខ្ញុំតែងតែអានការពិនិត្យឡើងវិញមុនពេលធ្វើការទិញដ៏សំខាន់។" },
+                { q: "What's something you've been wanting to buy recently?", a: "I've been wanting to buy a new camera.", q_kh: "តើមានអ្វីខ្លះដែលអ្នកកំពុងចង់ទិញថ្មីៗនេះ?", a_kh: "ខ្ញុំកំពុងចង់ទិញកាមេរ៉ាថ្មី។" },
+                { q: "Do you enjoy shopping for clothes?", a: "Yes, I like updating my wardrobe with new styles.", q_kh: "តើអ្នកចូលចិត្តទិញខោអាវឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តធ្វើឱ្យទាន់សម័យខោអាវរបស់ខ្ញុំជាមួយស្ទីលថ្មីៗ។" },
+                { q: "What's your favorite clothing store?", a: "My favorite clothing store is one that has good quality basics.", q_kh: "តើហាងខោអាវអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ហាងខោអាវដែលខ្ញុំចូលចិត្តជាងគេគឺហាងដែលមានគ្រឿងមូលដ្ឋានដែលមានគុណភាពល្អ។" },
+                { q: "Do you prefer shopping in malls or small shops?", a: "I prefer small shops for unique items and malls for convenience.", q_kh: "តើអ្នកចូលចិត្តទិញនៅផ្សារទំនើប ឬហាងតូចៗ?", a_kh: "ខ្ញុំចូលចិត្តហាងតូចៗសម្រាប់ឥវ៉ាន់ពិសេស និងផ្សារទំនើបសម្រាប់ភាពងាយស្រួល។" },
+                { q: "How do you budget for shopping?", a: "I set a monthly budget for discretionary spending.", q_kh: "តើអ្នកធ្វើថវិកាសម្រាប់ការទិញយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំកំណត់ថវិការាល់ខែសម្រាប់ការចំណាយតាមការសម្រេចចិត្ត។" },
+                { q: "Do you enjoy grocery shopping?", a: "I find grocery shopping satisfying when I find good deals.", q_kh: "តើអ្នកចូលចិត្តទិញគ្រឿងទេសឬ?", a_kh: "ខ្ញុំរកឃើញការទិញគ្រឿងទេសធ្វើអោយពេញចិត្តនៅពេលខ្ញុំរកឃើញការលក់ដែលល្អ។" },
+                { q: "What's your favorite supermarket?", a: "I prefer supermarkets with good produce sections.", q_kh: "តើសូពែរម៉ាកិតអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តសូពែរម៉ាកិតដែលមានផ្នែកផលិតផលល្អ។" },
+                { q: "Do you use coupons when shopping?", a: "Yes, I use digital coupons to save money.", q_kh: "តើអ្នកប្រើគូប៉ុងពេលទិញឥវ៉ាន់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំប្រើគូប៉ុងឌីជីថលដើម្បីសន្សំប្រាក់។" },
+                { q: "What's your favorite online shopping website?", a: "I use several websites depending on what I'm looking for.", q_kh: "តើគេហទំព័រទិញតាមអ៊ីនធឺណិតអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំប្រើគេហទំព័រជាច្រើនអាស្រ័យលើអ្វីដែលខ្ញុំកំពុងរកមើល។" },
+                { q: "Do you enjoy shopping for home decor?", a: "Yes, I like making my home comfortable and beautiful.", q_kh: "តើអ្នកចូលចិត្តទិញគ្រឿងតុបតែងផ្ទះឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តធ្វើអោយផ្ទះរបស់ខ្ញុំស្រួល និងស្រស់ស្អាត។" },
+                { q: "What's the best deal you've ever gotten?", a: "The best deal was a high-quality jacket at 70% off.", q_kh: "តើការលក់ដែលល្អបំផុតដែលអ្នកធ្លាប់បានទទួលគឺអ្វី?", a_kh: "ការលក់ដែលល្អបំផុតគឺអាវធំដែលមានគុណភាពខ្ពស់នៅ ៧០% បញ្ចុះតម្លៃ។" },
+                { q: "Do you enjoy shopping for technology?", a: "Yes, I like staying updated with the latest gadgets.", q_kh: "តើអ្នកចូលចិត្តទិញបច្ចេកវិទ្យាឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តធ្វើឱ្យទាន់សម័យជាមួយគ្រឿងអេឡិចត្រូនិកចុងក្រោយ។" },
+                { q: "What's your favorite season for shopping?", a: "I enjoy holiday season shopping for the festive atmosphere.", q_kh: "តើរដូវណាដែលអ្នកចូលចិត្តបំផុតសម្រាប់ការទិញ?", a_kh: "ខ្ញុំចូលចិត្តការទិញនៅរដូវថ្ងៃឈប់សម្រាកដោយសារតែបរិយាកាសពិធីបុណ្យ។" },
+                { q: "Do you prefer paying with cash or card?", a: "I prefer using cards for convenience and tracking expenses.", q_kh: "តើអ្នកចូលចិត្តបង់ប្រាក់ជាសាច់ប្រាក់ ឬកាត?", a_kh: "ខ្ញុំចូលចិត្តប្រើកាតដើម្បីភាពងាយស្រួល និងតាមដានការចំណាយ។" },
+                { q: "What's your favorite shopping memory?", a: "My favorite memory is Christmas shopping with my family.", q_kh: "តើការចងចាំទិញឥវ៉ាន់អ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ការចងចាំដែលខ្ញុំចូលចិត្តជាងគេគឺការទិញឥវ៉ាន់ណូអែលជាមួយគ្រួសាររបស់ខ្ញុំ។" },
+                { q: "Do you enjoy shopping for sports equipment?", a: "Yes, I like getting new gear for my favorite activities.", q_kh: "តើអ្នកចូលចិត្តទិញឧបករណ៍កីឡាឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តទទួលបានគ្រឿងថ្មីសម្រាប់សកម្មភាពដែលខ្ញុំចូលចិត្ត។" },
+                { q: "What's your favorite type of store?", a: "I love bookstores and stationery shops.", q_kh: "តើហាងប្រភេទណាដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តហាងសៀវភៅ និងហាងសម្ភារៈសាលា។" },
+                { q: "Do you enjoy shopping for beauty products?", a: "Yes, I like trying new skincare and makeup products.", q_kh: "តើអ្នកចូលចិត្តទិញផលិតផលសោភ័ណភាពឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តសាកល្បងផលិតផលថែរក្សាស្បែក និងម៉ាកអែកថ្មីៗ។" },
+                { q: "What's your shopping style?", a: "I'm a practical shopper who researches before buying.", q_kh: "តើស្ទីលទិញឥវ៉ាន់របស់អ្នកគឺអ្វី?", a_kh: "ខ្ញុំជាអ្នកទិញឥវ៉ាន់ដែលមានលក្ខណៈជាក់ស្តែងដែលស្រាវជ្រាវមុនពេលទិញ។" },
+                { q: "Do you enjoy shopping for kitchenware?", a: "Yes, I like having good tools for cooking.", q_kh: "តើអ្នកចូលចិត្តទិញគ្រឿងប្រើប្រាស់ក្នុងផ្ទះបាយឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តមានឧបករណ៍ល្អសម្រាប់ការចម្អិនអាហារ។" },
+                { q: "What's the most unusual item you've ever bought?", a: "The most unusual item was a handmade musical instrument.", q_kh: "តើឥវ៉ាន់អ្វីដែលចម្លែកបំផុតដែលអ្នកធ្លាប់បានទិញ?", a_kh: "ឥវ៉ាន់ដែលចម្លែកបំផុតគឺឧបករណ៍តន្ត្រីដែលធ្វើដោយដៃ។" },
+                { q: "Do you enjoy shopping during sales events?", a: "Yes, I like the excitement of finding good deals.", q_kh: "តើអ្នកចូលចិត្តទិញក្នុងពិធីការលក់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តការរំភើបនៃការរកឃើញការលក់ដែលល្អ។" },
+                { q: "What's your favorite thing about shopping?", a: "I enjoy the process of finding exactly what I need.", q_kh: "តើអ្វីដែលអ្នកចូលចិត្តបំផុតអំពីការទិញ?", a_kh: "ខ្ញុំចូលចិត្តដំណើរការនៃការរកឃើញអ្វីដែលខ្ញុំត្រូវការពិតប្រាកដ។" },
+                { q: "Do you enjoy shopping for gifts for others?", a: "Yes, I find joy in selecting thoughtful presents.", q_kh: "តើអ្នកចូលចិត្តទិញអំណោយសម្រាប់អ្នកដទៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញភាពរីករាយក្នុងការជ្រើសរើសអំណោយដែលមានគំនិត។" },
+                { q: "What's your least favorite part of shopping?", a: "My least favorite part is long checkout lines.", q_kh: "តើផ្នែកណាដែលអ្នកមិនចូលចិត្តបំផុតអំពីការទិញ?", a_kh: "ផ្នែកដែលខ្ញុំមិនចូលចិត្តបំផុតគឺជួរទូរទស្សន៍វែងៗ។" },
+                { q: "Do you enjoy shopping for art supplies?", a: "Yes, I love browsing art stores for new materials.", q_kh: "តើអ្នកចូលចិត្តទិញសម្ភារៈសិល្បៈឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តមើលហាងសិល្បៈសម្រាប់សម្ភារៈថ្មីៗ។" },
+                { q: "What's your favorite shopping district?", a: "I enjoy exploring different shopping areas in the city.", q_kh: "តើតំបន់ទិញឥវ៉ាន់អ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តស្វែងយល់ពីតំបន់ទិញឥវ៉ាន់ផ្សេងៗនៅក្នុងទីក្រុង។" }
+            ],
+            work: [
+                { q: "What do you do for work?", a: "I work as a graphic designer.", q_kh: "តើអ្នកធ្វើការអ្វី?", a_kh: "ខ្ញុំធ្វើការជាអ្នករចនាក្រាហ្វិក។" },
+                { q: "Do you enjoy your job?", a: "Yes, I find my work creative and fulfilling.", q_kh: "តើអ្នកចូលចិត្តការងាររបស់អ្នកឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញការងាររបស់ខ្ញុំមានភាពច្នៃប្រឌិត និងពេញលេញ។" },
+                { q: "How long have you been working there?", a: "I've been working there for three years.", q_kh: "តើអ្នកធ្វើការនៅទីនោះមកយូរប៉ុន្មានហើយ?", a_kh: "ខ្ញុំធ្វើការនៅទីនោះមកជាងបីឆ្នាំហើយ។" },
+                { q: "What's your typical workday like?", a: "My typical day involves meetings, design work, and client communication.", q_kh: "តើថ្ងៃធ្វើការធម្មតារបស់អ្នកគឺយ៉ាងណា?", a_kh: "ថ្ងៃធម្មតារបស់ខ្ញុំពាក់ព័ន្ធនឹងការប្រជុំ ការងាររចនា និងការទំនាក់ទំនងអតិថិជន។" },
+                { q: "Do you work better in the morning or afternoon?", a: "I'm more productive in the morning.", q_kh: "តើអ្នកធ្វើការបានល្អជាងនៅពេលព្រឹក ឬរសៀល?", a_kh: "ខ្ញុំមានផលិតភាពច្រើនជាងនៅពេលព្រឹក។" },
+                { q: "What's the most challenging part of your job?", a: "The most challenging part is meeting tight deadlines.", q_kh: "តើផ្នែកណាដែលលំបាកបំផុតនៃការងាររបស់អ្នក?", a_kh: "ផ្នែកដែលលំបាកបំផុតគឺការបំពេញពេលវេលាកំណត់ដែលតឹងរ៉ឹង។" },
+                { q: "Do you work well in a team?", a: "Yes, I enjoy collaborating with colleagues.", q_kh: "តើអ្នកធ្វើការល្អក្នុងក្រុមឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តសហការជាមួយកម្មករ។" },
+                { q: "What skills are important for your job?", a: "Creativity, attention to detail, and communication skills are important.", q_kh: "តើជំនាញអ្វីខ្លះដែលសំខាន់សម្រាប់ការងាររបស់អ្នក?", a_kh: "ភាពច្នៃប្រឌិត ការយកចិត្តទុកដាក់លម្អិត និងជំនាញទំនាក់ទំនងគឺសំខាន់។" },
+                { q: "Do you have to work overtime often?", a: "Occasionally, especially when projects are due.", q_kh: "តើអ្នកត្រូវតែធ្វើការលើសពេលញឹកញាប់ឬ?", a_kh: "ម្តងម្កាល ជាពិសេសនៅពេលដែលគម្រោងត្រូវតែបញ្ចប់។" },
+                { q: "What do you like most about your job?", a: "I enjoy the creative freedom and problem-solving aspects.", q_kh: "តើអ្នកចូលចិត្តអ្វីជាងគេអំពីការងាររបស់អ្នក?", a_kh: "ខ្ញុំចូលចិត្តសេរីភាពច្នៃប្រឌិត និងផ្នែកដោះស្រាយបញ្ហា។" },
+                { q: "Would you recommend your career to others?", a: "Yes, it's a rewarding field for creative people.", q_kh: "តើអ្នកនឹងផ្តល់អនុសាសន៍អាជីពរបស់អ្នកដល់អ្នកដទៃឬ?", a_kh: "បាទ/ចាស វាជាវិស័យដែលមានផលបុណ្យសម្រាប់មនុស្សដែលមានភាពច្នៃប្រឌិត។" },
+                { q: "What's your work environment like?", a: "My workplace is modern with an open-plan office.", q_kh: "តើបរិស្ថានការងាររបស់អ្នកយ៉ាងដូចម្តេច?", a_kh: "កន្លែងធ្វើការរបស់ខ្ញុំគឺទាន់សម័យជាមួយការិយាល័យដែលមានផែនការបើក។" },
+                { q: "Do you have a good work-life balance?", a: "Yes, I make sure to maintain a healthy balance.", q_kh: "តើអ្នកមានតុល្យភាពការងារ-ជីវិតល្អឬ?", a_kh: "បាទ/ចាស ខ្ញុំធានាថារក្សាតុល្យភាពដែលមានសុខភាពល្អ។" },
+                { q: "What professional development are you pursuing?", a: "I'm taking an online course in UX design.", q_kh: "តើការអភិវឌ្ឍវិជ្ជាជីវៈអ្វីដែលអ្នកកំពុងបន្ត?", a_kh: "ខ្ញុំកំពុងយកវគ្គសិក្សាតាមអ៊ីនធឺណិតក្នុងការរចនា UX។" },
+                { q: "What's your dream job?", a: "My dream job would be working as a freelance illustrator.", q_kh: "តើការងារក្តីស្រមៃរបស់អ្នកគឺអ្វី?", a_kh: "ការងារក្តីស្រមៃរបស់ខ្ញុំនឹងជាការធ្វើការជាអ្នកគូររូបឥតគិតថ្លៃ។" },
+                { q: "How do you handle work stress?", a: "I take short breaks and practice deep breathing exercises.", q_kh: "តើអ្នកដោះស្រាយភាពតានតឹងការងារយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំយកពេលសម្រាកខ្លី និងអនុវត្តលំហាត់ប្រាណដង្ហើមជ្រៅ។" },
+                { q: "What's the best career advice you've received?", a: "The best advice was to always keep learning new skills.", q_kh: "តើដំបូន្មានអាជីពដែលល្អបំផុតដែលអ្នកបានទទួលគឺអ្វី?", a_kh: "ដំបូន្មានដែលល្អបំផុតគឺត្រូវតែបន្តរៀនជំនាញថ្មីៗជានិច្ច។" },
+                { q: "Do you use any specific tools or software for work?", a: "Yes, I use Adobe Creative Suite and various project management tools.", q_kh: "តើអ្នកប្រើឧបករណ៍ ឬសូហ្វវែជាក់លាក់សម្រាប់ការងារឬ?", a_kh: "បាទ/ចាស ខ្ញុំប្រើ Adobe Creative Suite និងឧបករណ៍គ្រប់គ្រងគម្រោងផ្សេងៗ។" },
+                { q: "What's your biggest professional achievement?", a: "My biggest achievement was leading a successful rebranding project.", q_kh: "តើសមិទ្ធផលវិជ្ជាជីវៈដែលធំបំផុតរបស់អ្នកគឺអ្វី?", a_kh: "សមិទ្ធផលដែលធំបំផុតរបស់ខ្ញុំគឺការដឹកនាំគម្រោងប្តូរម៉ាកដែលជោគជ័យ។" },
+                { q: "Where do you see yourself in five years?", a: "I see myself in a senior design role or running my own studio.", q_kh: "តើអ្នកឃើញខ្លួនអ្នកនៅឯណាក្នុងរយៈពេលប្រាំឆ្នាំ?", a_kh: "ខ្ញុំឃើញខ្លួនខ្ញុំនៅក្នុងតួនាទីរចនាជាន់ខ្ពស់ ឬដំណើរការស្ទូឌីយោផ្ទាល់ខ្លួនរបស់ខ្ញុំ។" },
+                { q: "Do you enjoy your current position?", a: "Yes, I find it challenging and rewarding.", q_kh: "តើអ្នកចូលចិត្តតួនាទីបច្ចុប្បន្នរបស់អ្នកឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញវាលំបាក និងមានផលបុណ្យ។" },
+                { q: "What's your favorite part of the workweek?", a: "I enjoy Friday afternoons when we often have team activities.", q_kh: "តើផ្នែកណានៃសប្តាហ៍ការងារដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តពេលរសៀលថ្ងៃសុក្រនៅពេលដែលយើងច្រើនមានសកម្មភាពក្រុម។" },
+                { q: "Do you have work friends?", a: "Yes, I've developed good friendships with several colleagues.", q_kh: "តើអ្នកមានមិត្តភក្តិនៅការងារឬ?", a_kh: "បាទ/ចាស ខ្ញុំបានអភិវឌ្ឍមិត្តភាពល្អជាមួយកម្មករជាច្រើន។" },
+                { q: "What's your morning routine before work?", a: "I wake up, exercise, have breakfast, and review my schedule.", q_kh: "តើទម្លាប់ពេលព្រឹករបស់អ្នកមុនពេលការងារគឺអ្វី?", a_kh: "ខ្ញុំភ្ញាក់ ហាត់ប្រាណ ញ៉ាំអាហារពេលព្រឹក និងពិនិត្យផែនការរបស់ខ្ញុំ។" },
+                { q: "Do you enjoy company events?", a: "Yes, I appreciate opportunities to connect with coworkers outside work.", q_kh: "តើអ្នកចូលចិត្តព្រឹត្តិការណ៍ក្រុមហ៊ុនឬ?", a_kh: "បាទ/ចាស ខ្ញុំពេញចិត្តនឹងឱកាសក្នុងការភ្ជាប់ទំនាក់ទំនងជាមួយកម្មករក្រៅការងារ។" },
+                { q: "What's the most important lesson you've learned at work?", a: "The importance of clear communication and teamwork.", q_kh: "តើមេរៀនដែលសំខាន់បំផុតដែលអ្នកបានរៀននៅការងារគឺអ្វី?", a_kh: "សារៈសំខាន់នៃការទំនាក់ទំនងច្បាស់លាស់ និងការងារក្រុម។" },
+                { q: "Do you take work home with you?", a: "Rarely, I try to keep work at the office.", q_kh: "តើអ្នកយកការងារទៅផ្ទះជាមួយអ្នកឬ?", a_kh: "កម្រណាស់ ខ្ញុំព្យាយាមរក្សាការងារនៅការិយាល័យ។" },
+                { q: "What's your favorite project you've worked on?", a: "I enjoyed designing a website for a non-profit organization.", q_kh: "តើគម្រោងអ្វីដែលអ្នកចូលចិត្តបំផុតដែលអ្នកបានធ្វើ?", a_kh: "ខ្ញុំចូលចិត្តរចនាគេហទំព័រសម្រាប់អង្គការក្រៅរដ្ឋាភិបាល។" },
+                { q: "Do you have a mentor at work?", a: "Yes, I have a senior colleague who provides guidance.", q_kh: "តើអ្នកមានអ្នកណែនាំនៅការងារឬ?", a_kh: "បាទ/ចាស ខ្ញុំមានកម្មករជាន់ខ្ពស់ដែលផ្តល់ការណែនាំ។" },
+                { q: "What's your approach to difficult coworkers?", a: "I try to maintain professionalism and open communication.", q_kh: "តើវិធីសាស្ត្ររបស់អ្នកចំពោះកម្មករដែលលំបាកគឺអ្វី?", a_kh: "ខ្ញុំព្យាយាមរក្សាភាពវិជ្ជាជីវៈ និងការទំនាក់ទំនងបើកចំហ។" },
+                { q: "Do you enjoy training new employees?", a: "Yes, I like sharing knowledge and helping others learn.", q_kh: "តើអ្នកចូលចិត្តបណ្តុះបណ្តាលបុគ្គលិកថ្មីឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តចែករំលែកចំណេះដឹង និងជួយអ្នកដទៃរៀន។" },
+                { q: "What's your favorite work memory?", a: "My favorite memory is when our team successfully launched a major project.", q_kh: "តើការចងចាំការងារអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ការចងចាំដែលខ្ញុំចូលចិត្តជាងគេគឺនៅពេលដែលក្រុមរបស់យើងបានបើកដំណើរគម្រោងសំខាន់ដោយជោគជ័យ។" },
+                { q: "Do you participate in work-related training?", a: "Yes, I attend workshops and conferences to stay updated.", q_kh: "តើអ្នកចូលរួមក្នុងការបណ្តុះបណ្តាលពាក់ព័ន្ធនឹងការងារឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលរួមសិក្ខាសាលា និងវេទិកាដើម្បីធ្វើឱ្យទាន់សម័យ។" },
+                { q: "What's your preferred method of communication at work?", a: "I prefer email for formal communication and instant messaging for quick questions.", q_kh: "តើវិធីសាស្ត្រទំនាក់ទំនងដែលអ្នកចូលចិត្តនៅការងារគឺអ្វី?", a_kh: "ខ្ញុំចូលចិត្តអ៊ីមែលសម្រាប់ការទំនាក់ទំនងផ្លូវការ និងការផ្ញើសារភ្លាមៗសម្រាប់សំណួររហ័ស។" },
+                { q: "Do you enjoy problem-solving at work?", a: "Yes, I find it satisfying to find solutions to challenges.", q_kh: "តើអ្នកចូលចិត្តដោះស្រាយបញ្ហានៅការងារឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញវាពេញចិត្តក្នុងការរកដំណោះស្រាយចំពោះបញ្ហាប្រឈម។" },
+                { q: "What's your approach to deadlines?", a: "I plan ahead and break large projects into manageable tasks.", q_kh: "តើវិធីសាស្ត្ររបស់អ្នកចំពោះពេលវេលាកំណត់គឺអ្វី?", a_kh: "ខ្ញុំធ្វើផែនការមុន និងបំបែកគម្រោងធំៗទៅជាភារកិច្ចដែលអាចគ្រប់គ្រងបាន។" },
+                { q: "Do you enjoy presenting your work?", a: "Yes, I like sharing my ideas and getting feedback.", q_kh: "តើអ្នកចូលចិត្តបង្ហាញការងាររបស់អ្នកឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តចែករំលែកគំនិតរបស់ខ្ញុំ និងទទួលបានការតបស្នង។" },
+                { q: "What's the most interesting thing about your industry?", a: "The constant evolution of technology and design trends.", q_kh: "តើអ្វីដែលគួរអោយចាប់អារម្មណ៍បំផុតអំពីឧស្សាហកម្មរបស់អ្នក?", a_kh: "ការវិវត្តន៍ថេរនៃបច្ចេកវិទ្យា និងទំនោររចនា។" },
+                { q: "Do you enjoy team-building activities?", a: "Yes, they help strengthen working relationships.", q_kh: "តើអ្នកចូលចិត្តសកម្មភាពកសាងក្រុមឬ?", a_kh: "បាទ/ចាស ពួកគេជួយពង្រឹងទំនាក់ទំនងការងារ។" },
+                { q: "What's your favorite work tool?", a: "I really appreciate our project management software.", q_kh: "តើឧបករណ៍ការងារអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំពិតជាពេញចិត្តនឹងសូហ្វវែគ្រប់គ្រងគម្រោងរបស់យើង។" },
+                { q: "Do you have work goals for this year?", a: "Yes, I want to improve my leadership skills and learn new software.", q_kh: "តើអ្នកមានគោលដៅការងារសម្រាប់ឆ្នាំនេះឬ?", a_kh: "បាទ/ចាស ខ្ញុំចង់កែលម្អជំនាញភាពជាអ្នកដឹកនាំ និងរៀនសូហ្វវែថ្មី។" },
+                { q: "What's your approach to continuous learning?", a: "I dedicate time each week to learning new skills and industry trends.", q_kh: "តើវិធីសាស្ត្ររបស់អ្នកចំពោះការរៀនបន្តគឺអ្វី?", a_kh: "ខ្ញុំឧទ្ទិសពេលរាល់សប្តាហ៍ដើម្បីរៀនជំនាញថ្មីៗ និងទំនោរឧស្សាហកម្ម។" },
+                { q: "Do you enjoy remote work?", a: "I appreciate the flexibility but miss in-person collaboration.", q_kh: "តើអ្នកចូលចិត្តការងារពីចម្ងាយឬ?", a_kh: "ខ្ញុំពេញចិត្តនឹងភាពអាចប្តូរបាន ប៉ុន្តែខ្ញុំនឹកការសហការផ្ទាល់ខ្លួន។" },
+                { q: "What's the best part of your job?", a: "The creativity and seeing my designs come to life.", q_kh: "តើផ្នែកណាដែលល្អបំផុតនៃការងាររបស់អ្នក?", a_kh: "ភាពច្នៃប្រឌិត និងការឃើញការរចនារបស់ខ្ញុំក្លាយជាការពិត។" },
+                { q: "Do you enjoy your commute?", a: "I use my commute time to listen to podcasts and audiobooks.", q_kh: "តើអ្នកចូលចិត្តការធ្វើដំណើរទៅការងាររបស់អ្នកឬ?", a_kh: "ខ្ញុំប្រើពេលធ្វើដំណើររបស់ខ្ញុំដើម្បីស្តាប់ការផ្សាយ និងសៀវភៅសំឡេង។" },
+                { q: "What's your favorite work ritual?", a: "I enjoy our morning team check-ins to start the day organized.", q_kh: "តើពិធីការងារអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តការពិនិត្យចូលក្រុមពេលព្រឹករបស់យើងដើម្បីចាប់ផ្តើមថ្ងៃដែលមានសណ្តាប់ធ្នាប់។" }
+            ],
+            health: [
+                { q: "How often do you exercise?", a: "I exercise four times a week.", q_kh: "តើអ្នកហាត់ប្រាណញឹកញាប់ប៉ុណ្ណា?", a_kh: "ខ្ញុំហាត់ប្រាណបួនដងក្នុងមួយសប្តាហ៍។" },
+                { q: "What's your favorite form of exercise?", a: "My favorite is swimming.", q_kh: "តើទម្រង់ហាត់ប្រាណអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "របស់ដែលខ្ញុំចូលចិត្តជាងគេគឺការហែលទឹក។" },
+                { q: "Do you eat a balanced diet?", a: "I try to eat a balanced diet with plenty of fruits and vegetables.", q_kh: "តើអ្នកញ៉ាំអាហារដែលមានតុល្យភាពឬ?", a_kh: "ខ្ញុំព្យាយាមញ៉ាំអាហារដែលមានតុល្យភាពជាមួយផ្លែឈើ និងបន្លែច្រើន។" },
+                { q: "How many hours of sleep do you get per night?", a: "I aim for 7-8 hours of sleep each night.", q_kh: "តើអ្នកគេងប៉ុន្មានម៉ោងក្នុងមួយយប់?", a_kh: "ខ្ញុំទស្សន៍ទាយ ៧-៨ ម៉ោងនៃការគេងរាល់យប់។" },
+                { q: "Do you drink enough water daily?", a: "Yes, I drink about 2 liters of water every day.", q_kh: "តើអ្នកផឹកទឹកគ្រប់គ្រាន់រាល់ថ្ងៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំផឹកទឹកប្រហែល ២ លីត្ររាល់ថ្ងៃ។" },
+                { q: "How do you manage stress?", a: "I manage stress through meditation and exercise.", q_kh: "តើអ្នកគ្រប់គ្រងភាពតានតឹងយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំគ្រប់គ្រងភាពតានតឹងតាមរយៈការសមាធិ និងលំហាត់ប្រាណ។" },
+                { q: "Do you take any vitamins or supplements?", a: "Yes, I take vitamin D and omega-3 supplements.", q_kh: "តើអ្នកផឹកវីតាមីន ឬថ្នាំបំពេញអ្វីខ្លះឬ?", a_kh: "បាទ/ចាស ខ្ញុំផឹកវីតាមីនឌី និងថ្នាំបំពេញអូមេហ្គា-៣។" },
+                { q: "How often do you see a doctor for check-ups?", a: "I have an annual check-up with my doctor.", q_kh: "តើអ្នកឃើញគ្រូពេទ្យញឹកញាប់ប៉ុណ្ណាសម្រាប់ការពិនិត្យ?", a_kh: "ខ្ញុំមានការពិនិត្យប្រចាំឆ្នាំជាមួយគ្រូពេទ្យរបស់ខ្ញុំ។" },
+                { q: "What do you do when you feel sick?", a: "I rest, drink fluids, and see a doctor if necessary.", q_kh: "តើអ្នកធ្វើអ្វីនៅពេលអ្នកមានអារម្មណ៍ឈឺ?", a_kh: "ខ្ញុំសម្រាក ផឹកទឹក និងឃើញគ្រូពេទ្យប្រសិនបើចាំបាច់។" },
+                { q: "Do you have any health goals?", a: "My health goal is to improve my flexibility through yoga.", q_kh: "តើអ្នកមានគោលដៅសុខភាពអ្វីខ្លះឬ?", a_kh: "គោលដៅសុខភាពរបស់ខ្ញុំគឺកែលម្អភាពអាចបត់បែនបានរបស់ខ្ញុំតាមរយៈយ៉ូហ្គា។" },
+                { q: "How do you stay motivated to exercise?", a: "I set specific goals and vary my workouts to keep them interesting.", q_kh: "តើអ្នករក្សាការលើកទឹកចិត្តដើម្បីហាត់ប្រាណយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំកំណត់គោលដៅជាក់លាក់ និងប្រែប្រួលលំហាត់ប្រាណរបស់ខ្ញុំដើម្បីរក្សាវាឱ្យគួរអោយចាប់អារម្មណ៍។" },
+                { q: "What's your approach to mental health?", a: "I prioritize self-care and seek support when needed.", q_kh: "តើវិធីសាស្ត្ររបស់អ្នកចំពោះសុខភាពផ្លូវចិត្តគឺអ្វី?", a_kh: "ខ្ញុំដាក់អាទិភាពដល់ការថែរក្សាខ្លួនឯង និងស្វែងរកការគាំទ្រនៅពេលចាំបាច់។" },
+                { q: "Do you practice any mindfulness techniques?", a: "Yes, I practice meditation for 10 minutes daily.", q_kh: "តើអ្នកអនុវត្តបច្ចេកទេសស្មារតីអ្វីខ្លះឬ?", a_kh: "បាទ/ចាស ខ្ញុំអនុវត្តការសមាធិ ១០ នាទីរាល់ថ្ងៃ។" },
+                { q: "How do you maintain a healthy work-life balance?", a: "I set boundaries and make time for hobbies and relaxation.", q_kh: "តើអ្នករក្សាតុល្យភាពការងារ-ជីវិតដែលមានសុខភាពល្អយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំកំណត់ព្រំដែន និងធ្វើពេលវេលាសម្រាប់ការកម្សាន្ត និងការសម្រាក។" },
+                { q: "What's your favorite healthy snack?", a: "My favorite healthy snack is apple slices with peanut butter.", q_kh: "តើអាហារសម្រន់ដែលមានសុខភាពល្អអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "អាហារសម្រន់ដែលមានសុខភាពល្អដែលខ្ញុំចូលចិត្តជាងគេគឺផ្លែប៉ុមផ្លែកាត់ជាមួយប៊ឺរសណ្តែកដី។" },
+                { q: "Do you limit your screen time?", a: "Yes, I try to take regular breaks from screens.", q_kh: "តើអ្នកកំណត់ពេលវេលាអេក្រង់របស់អ្នកឬ?", a_kh: "បាទ/ចាស ខ្ញុំព្យាយាមយកពេលសម្រាកជាទៀងទាត់ពីអេក្រង់។" },
+                { q: "How do you stay active during the day?", a: "I take short walks and use a standing desk.", q_kh: "តើអ្នករក្សាភាពសកម្មក្នុងពេលថ្ងៃយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំដើរតិចៗ និងប្រើតុឈរ។" },
+                { q: "What's your favorite way to relax?", a: "My favorite way to relax is reading a book.", q_kh: "តើរបៀបណាដែលអ្នកចូលចិត្តបំផុតក្នុងការសម្រាក?", a_kh: "របៀបដែលខ្ញុំចូលចិត្តបំផុតក្នុងការសម្រាកគឺអានសៀវភៅ។" },
+                { q: "Do you have any dietary restrictions?", a: "No, I don't have any dietary restrictions.", q_kh: "តើអ្នកមានការរឹតត្បិតអាហាររស់អ្វីខ្លះឬ?", a_kh: "ទេ ខ្ញុំមិនមានការរឹតត្បិតអាហាររស់អ្វីទេ។" },
+                { q: "How important is health to you?", a: "Health is very important to me as it affects all aspects of life.", q_kh: "តើសុខភាពមានសារៈសំខាន់ប៉ុណ្ណាចំពោះអ្នក?", a_kh: "សុខភាពគឺមានសារៈសំខាន់ណាស់ចំពោះខ្ញុំដោយសារតែវាប៉ះពាល់ដល់ផ្នែកទាំងអស់នៃជីវិត។" },
+                { q: "Do you get regular dental check-ups?", a: "Yes, I visit the dentist every six months.", q_kh: "តើអ្នកទទួលបានការពិនិត្យធ្មេញជាទៀងទាត់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំទៅជួបគ្រូពេទ្យធ្មេញរាល់ប្រាំមួយខែ។" },
+                { q: "What's your favorite physical activity?", a: "I enjoy hiking in nature on weekends.", q_kh: "តើសកម្មភាពរាងកាយអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តការឡើងភ្នំនៅក្នុងធម្មជាតិនៅថ្ងៃចុងសប្តាហ៍។" },
+                { q: "Do you practice good posture?", a: "I try to maintain good posture, especially when working at my desk.", q_kh: "តើអ្នកអនុវត្តភាពត្រឹមត្រូវល្អឬ?", a_kh: "ខ្ញុំព្យាយាមរក្សាភាពត្រឹមត្រូវល្អ ជាពិសេសនៅពេលធ្វើការនៅតុរបស់ខ្ញុំ។" },
+                { q: "How do you boost your immune system?", a: "I eat nutritious foods, exercise regularly, and get enough sleep.", q_kh: "តើអ្នកបង្កើនប្រព័ន្ធភាពស៊ាំរបស់អ្នកយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំញ៉ាំអាហារដែលមានជីវជាតិ ហាត់ប្រាណជាទៀងទាត់ និងគេងឱ្យបានគ្រប់គ្រាន់។" },
+                { q: "Do you enjoy cooking healthy meals?", a: "Yes, I find it rewarding to prepare nutritious food.", q_kh: "តើអ្នកចូលចិត្តចម្អិនអាហារដែលមានសុខភាពល្អឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញវាមានផលបុណ្យក្នុងការរៀបចំអាហារដែលមានជីវជាតិ។" },
+                { q: "What's your approach to preventive healthcare?", a: "I focus on regular check-ups and healthy lifestyle habits.", q_kh: "តើវិធីសាស្ត្ររបស់អ្នកចំពោះការថែរក្សាសុខភាពបង្ការគឺអ្វី?", a_kh: "ខ្ញុំផ្តោតលើការពិនិត្យជាទៀងទាត់ និងទម្លាប់របៀបរស់នៅដែលមានសុខភាពល្អ។" },
+                { q: "Do you track your health metrics?", a: "I occasionally check my weight and blood pressure.", q_kh: "តើអ្នកតាមដានម៉ែត្រសុខភាពរបស់អ្នកឬ?", a_kh: "ខ្ញុំពិនិត្យទម្ងន់ និងសម្ពាធឈាមរបស់ខ្ញុំម្តងម្កាល។" },
+                { q: "What's your favorite healthy breakfast?", a: "I enjoy oatmeal with fruits and nuts.", q_kh: "តើអាហារពេលព្រឹកដែលមានសុខភាពល្អអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តអ័រមេលជាមួយផ្លែឈើ និងគ្រាប់ធញ្ញជាតិ។" },
+                { q: "Do you practice stretching exercises?", a: "Yes, I stretch for 10 minutes every morning.", q_kh: "តើអ្នកអនុវត្តលំហាត់ប្រាណបត់បែនឬ?", a_kh: "បាទ/ចាស ខ្ញុំបត់បែន ១០ នាទីរាល់ព្រឹក។" },
+                { q: "How do you stay hydrated?", a: "I carry a water bottle with me and drink throughout the day.", q_kh: "តើអ្នករក្សាភាពសើមយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំកាន់កែវទឹកជាមួយខ្ញុំ និងផឹកពេញមួយថ្ងៃ។" },
+                { q: "What's your favorite way to de-stress?", a: "I enjoy taking walks in nature to clear my mind.", q_kh: "តើរបៀបណាដែលអ្នកចូលចិត្តបំផុតក្នុងការបន្ធូរអារម្មណ៍?", a_kh: "ខ្ញុំចូលចិត្តដើរនៅក្នុងធម្មជាតិដើម្បីសម្អាតគំនិតរបស់ខ្ញុំ។" },
+                { q: "Do you take health supplements?", a: "I take a multivitamin and fish oil supplements.", q_kh: "តើអ្នកយកថ្នាំបំពេញសុខភាពឬ?", a_kh: "ខ្ញុំយកវីតាមីនចម្រុះ និងថ្នាំបំពេញប្រេងត្រី។" },
+                { q: "How do you maintain energy throughout the day?", a: "I eat small, frequent meals and stay hydrated.", q_kh: "តើអ្នករក្សាថាមពលពេញមួយថ្ងៃយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំញ៉ាំអាហារតូចៗញឹកញាប់ និងរក្សាភាពសើម។" },
+                { q: "What's your favorite healthy lunch?", a: "I enjoy salads with grilled chicken or fish.", q_kh: "តើអាហារថ្ងៃត្រង់ដែលមានសុខភាពល្អអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តសាឡាតជាមួយសាច់មាន់អាំង ឬត្រី។" },
+                { q: "Do you practice deep breathing exercises?", a: "Yes, I practice deep breathing when I feel stressed.", q_kh: "តើអ្នកអនុវត្តលំហាត់ប្រាណដង្ហើមជ្រៅឬ?", a_kh: "បាទ/ចាស ខ្ញុំអនុវត្តការដង្ហើមជ្រៅនៅពេលខ្ញុំមានអារម្មណ៍តានតឹង។" },
+                { q: "How do you ensure quality sleep?", a: "I maintain a consistent sleep schedule and avoid screens before bed.", q_kh: "តើអ្នកធានាបាននូវគុណភាពគេងយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំរក្សាកាលវិភាគគេងដែលសាមញ្ញ និងជៀសវាងអេក្រង់មុនពេលគេង។" },
+                { q: "What's your approach to seasonal health?", a: "I adjust my diet and exercise routine with the seasons.", q_kh: "តើវិធីសាស្ត្ររបស់អ្នកចំពោះសុខភាពតាមរដូវគឺអ្វី?", a_kh: "ខ្ញុំកែលម្អអាហាររស់ និងទម្លាប់ហាត់ប្រាណរបស់ខ្ញុំជាមួយរដូវ។" },
+                { q: "Do you enjoy outdoor activities for health?", a: "Yes, I believe fresh air and sunlight are beneficial.", q_kh: "តើអ្នកចូលចិត្តសកម្មភាពក្រៅផ្ទះសម្រាប់សុខភាពឬ?", a_kh: "បាទ/ចាស ខ្ញុំជឿថាខ្យល់ស្រស់ និងពន្លឺព្រះអាទិត្យមានផលប្រយោជន៍។" },
+                { q: "What's your favorite health tip?", a: "My favorite tip is to listen to your body's signals.", q_kh: "តើគន្លឹះសុខភាពអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "គន្លឹះដែលខ្ញុំចូលចិត្តជាងគេគឺស្តាប់សញ្ញារាងកាយរបស់អ្នក។" },
+                { q: "Do you practice gratitude for mental health?", a: "Yes, I write down three things I'm grateful for each day.", q_kh: "តើអ្នកអនុវត្តការដឹងគុណសម្រាប់សុខភាពផ្លូវចិត្តឬ?", a_kh: "បាទ/ចាស ខ្ញុំសរសេររបស់បីដែលខ្ញុំដឹងគុណរាល់ថ្ងៃ។" },
+                { q: "How do you maintain joint health?", a: "I stay active and include flexibility exercises in my routine.", q_kh: "តើអ្នករក្សាសុខភាពសន្លាក់យ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំរក្សាភាពសកម្ម និងបញ្ចូលលំហាត់ប្រាណបត់បែនក្នុងទម្លាប់របស់ខ្ញុំ។" },
+                { q: "What's your approach to healthy aging?", a: "I focus on staying active, eating well, and maintaining social connections.", q_kh: "តើវិធីសាស្ត្ររបស់អ្នកចំពោះការចម្រើនវ័យដែលមានសុខភាពល្អគឺអ្វី?", a_kh: "ខ្ញុំផ្តោតលើការរក្សាភាពសកម្ម ញ៉ាំអាហារបានល្អ និងរក្សាទំនាក់ទំនងសង្គម។" },
+                { q: "Do you enjoy health-focused podcasts or books?", a: "Yes, I enjoy learning about nutrition and wellness.", q_kh: "តើអ្នកចូលចិត្តការផ្សាយ ឬសៀវភៅដែលផ្តោតលើសុខភាពឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តរៀនអំពីអាហាររូបត្ថម្ភ និងការមានសុខភាពល្អ។" },
+                { q: "What's your favorite way to stay active indoors?", a: "I enjoy yoga and home workout videos.", q_kh: "តើរបៀបណាដែលអ្នកចូលចិត្តបំផុតក្នុងការរក្សាភាពសកម្មក្នុងផ្ទះ?", a_kh: "ខ្ញុំចូលចិត្តយ៉ូហ្គា និងវីដេអូលំហាត់ប្រាណនៅផ្ទះ។" },
+                { q: "How do you manage seasonal allergies?", a: "I take medication as needed and avoid allergy triggers.", q_kh: "តើអ្នកគ្រប់គ្រងអាឡែសីតាមរដូវយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំយកថ្នាំតាមការតម្រូវការ និងជៀសវាងការបង្កអាឡែសី។" },
+                { q: "What's your favorite healthy dinner?", a: "I enjoy grilled fish with steamed vegetables.", q_kh: "តើអាហារពេលល្ងាចដែលមានសុខភាពល្អអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តត្រីអាំងជាមួយបន្លែចំហុយ។" },
+                { q: "Do you practice good hand hygiene?", a: "Yes, I wash my hands frequently, especially during cold season.", q_kh: "តើអ្នកអនុវត្តសុខភាពដៃល្អឬ?", a_kh: "បាទ/ចាស ខ្ញុំលាងដៃញឹកញាប់ ជាពិសេសក្នុងរដូវផ្តាសាយ។" },
+                { q: "How do you stay motivated about health goals?", a: "I track my progress and celebrate small victories.", q_kh: "តើអ្នករក្សាការលើកទឹកចិត្តអំពីគោលដៅសុខភាពយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំតាមដានដំណើរការរបស់ខ្ញុំ និងអបអរជ័យជម្នះតូចៗ។" }
+            ],
+            hobbies: [
+                { q: "What are your hobbies?", a: "My hobbies include reading, gardening, and photography.", q_kh: "តើការកម្សាន្តរបស់អ្នកមានអ្វីខ្លះ?", a_kh: "ការកម្សាន្តរបស់ខ្ញុំមានអានសៀវភៅ ដាំដំណាំ និងថតរូប។" },
+                { q: "How much time do you spend on your hobbies?", a: "I spend about 5-10 hours per week on my hobbies.", q_kh: "តើអ្នកប្រើពេលប៉ុន្មានលើការកម្សាន្តរបស់អ្នក?", a_kh: "ខ្ញុំប្រើពេលប្រហែល ៥-១០ ម៉ោងក្នុងមួយសប្តាហ៍លើការកម្សាន្តរបស់ខ្ញុំ។" },
+                { q: "What hobby would you like to try?", a: "I'd like to learn how to play the piano.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកចង់សាកល្បង?", a_kh: "ខ្ញុំចង់រៀនការលេងព្យែណូ។" },
+                { q: "Do you prefer indoor or outdoor hobbies?", a: "I enjoy both, but I particularly like outdoor activities.", q_kh: "តើអ្នកចូលចិត្តការកម្សាន្តក្នុងផ្ទះ ឬក្រៅផ្ទះ?", a_kh: "ខ្ញុំចូលចិត្តទាំងពីរ ប៉ុន្តែខ្ញុំចូលចិត្តសកម្មភាពក្រៅផ្ទះជាពិសេស។" },
+                { q: "What's the most expensive hobby you have?", a: "Photography is my most expensive hobby due to equipment costs.", q_kh: "តើការកម្សាន្តអ្វីដែលថ្លៃបំផុតដែលអ្នកមាន?", a_kh: "ការថតរូបគឺជាការកម្សាន្តដែលថ្លៃបំផុតរបស់ខ្ញុំដោយសារតែថ្លៃឧបករណ៍។" },
+                { q: "Do you have any creative hobbies?", a: "Yes, I enjoy painting and writing.", q_kh: "តើអ្នកមានការកម្សាន្តច្នៃប្រឌិតអ្វីខ្លះឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តគូររូប និងសរសេរ។" },
+                { q: "What hobby have you had the longest?", a: "I've been reading as a hobby since childhood.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកមានយូរបំផុត?", a_kh: "ខ្ញុំបានអានជាការកម្សាន្តតាំងពីវ័យកុមារ។" },
+                { q: "Do you prefer solo or group hobbies?", a: "I enjoy both, depending on my mood.", q_kh: "តើអ្នកចូលចិត្តការកម្សាន្តតែម្នាក់ឯង ឬក្រុម?", a_kh: "ខ្ញុំចូលចិត្តទាំងពីរ អាស្រ័យលើអារម្មណ៍របស់ខ្ញុំ។" },
+                { q: "What hobby helps you relax?", a: "Reading helps me relax and unwind.", q_kh: "តើការកម្សាន្តអ្វីដែលជួយអ្នកសម្រាក?", a_kh: "ការអានជួយខ្ញុំសម្រាក និងបន្ធូរអារម្មណ៍។" },
+                { q: "Have you made friends through your hobbies?", a: "Yes, I've met some great people through hiking groups.", q_kh: "តើអ្នកបានធ្វើជាមិត្តភក្តិតាមរយៈការកម្សាន្តរបស់អ្នកឬ?", a_kh: "បាទ/ចាស ខ្ញុំបានជួបមនុស្សដ៏អស្ចារ្យមួយចំនួនតាមរយៈក្រុមឡើងភ្នំ។" },
+                { q: "What equipment do you need for your hobbies?", a: "For photography, I need a camera and lenses.", q_kh: "តើអ្នកត្រូវការឧបករណ៍អ្វីខ្លះសម្រាប់ការកម្សាន្តរបស់អ្នក?", a_kh: "សម្រាប់ការថតរូប ខ្ញុំត្រូវការកាមេរ៉ា និងកញ្ចក់។" },
+                { q: "Do you prefer active or passive hobbies?", a: "I prefer active hobbies that keep me engaged.", q_kh: "តើអ្នកចូលចិត្តការកម្សាន្តសកម្ម ឬអសកម្ម?", a_kh: "ខ្ញុំចូលចិត្តការកម្សាន្តសកម្មដែលរក្សាខ្ញុំឱ្យចូលរួម។" },
+                { q: "What's the most unusual hobby you've heard of?", a: "The most unusual hobby I've heard of is extreme ironing.", q_kh: "តើការកម្សាន្តអ្វីដែលចម្លែកបំផុតដែលអ្នកបានឮ?", a_kh: "ការកម្សាន្តដែលចម្លែកបំផុតដែលខ្ញុំបានឮគឺការអ៊ុតខោអាវខ្លាំង។" },
+                { q: "Do you spend money on your hobbies?", a: "Yes, I budget for my hobbies each month.", q_kh: "តើអ្នកចំណាយប្រាក់លើការកម្សាន្តរបស់អ្នកឬ?", a_kh: "បាទ/ចាស ខ្ញុំធ្វើថវិកាសម្រាប់ការកម្សាន្តរបស់ខ្ញុំរាល់ខែ។" },
+                { q: "What hobby would you recommend to others?", a: "I would recommend hiking for both physical and mental benefits.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកនឹងផ្តល់អនុសាសន៍ដល់អ្នកដទៃ?", a_kh: "ខ្ញុំនឹងផ្តល់អនុសាសន៍ការឡើងភ្នំសម្រាប់ផលប្រយោជន៍រាងកាយ និងផ្លូវចិត្តទាំងពីរ។" },
+                { q: "How did you get started with your favorite hobby?", a: "I started photography after receiving a camera as a gift.", q_kh: "តើអ្នកបានចាប់ផ្តើមជាមួយការកម្សាន្តដែលអ្នកចូលចិត្តជាងគេយ៉ាងដូចម្តេច?", a_kh: "ខ្ញុំបានចាប់ផ្តើមការថតរូបក្រោយពីទទួលបានកាមេរ៉ាជាអំណោយ។" },
+                { q: "Do you have seasonal hobbies?", a: "Yes, I ski in winter and swim in summer.", q_kh: "តើអ្នកមានការកម្សាន្តតាមរដូវឬ?", a_kh: "បាទ/ចាស ខ្ញុំជិះស្គីនៅរដូវរងា និងហែលទឹកនៅរដូវក្តៅ។" },
+                { q: "What hobby have you given up?", a: "I used to collect stamps but no longer do.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកបានលះបង់?", a_kh: "ខ្ញុំធ្លាប់ប្រមូលតែមប្រសិនបើប៉ុន្តែមិនធ្វើទៀតទេ។" },
+                { q: "Do you prefer learning new skills or perfecting existing ones?", a: "I enjoy both learning new skills and improving existing ones.", q_kh: "តើអ្នកចូលចិត្តរៀនជំនាញថ្មី ឬធ្វើឱ្យប្រសើរឡើងនូវជំនាញដែលមានស្រាប់?", a_kh: "ខ្ញុំចូលចិត្តទាំងការរៀនជំនាញថ្មីៗ និងការកែលម្អជំនាញដែលមានស្រាប់។" },
+                { q: "What hobby makes you lose track of time?", a: "When I'm reading a good book, I often lose track of time.", q_kh: "តើការកម្សាន្តអ្វីដែលធ្វើឱ្យអ្នកបាត់បង់ការតាមដានពេលវេលា?", a_kh: "នៅពេលខ្ញុំកំពុងអានសៀវភៅល្អ ខ្ញុំច្រើនបាត់បង់ការតាមដានពេលវេលា។" },
+                { q: "Do you enjoy musical hobbies?", a: "Yes, I play the guitar and enjoy singing.", q_kh: "តើអ្នកចូលចិត្តការកម្សាន្តតន្ត្រីឬ?", a_kh: "បាទ/ចាស ខ្ញុំលេងហ្គីតា និងចូលចិត្តចំរៀង។" },
+                { q: "What's your favorite hobby for rainy days?", a: "I enjoy puzzles and board games when it rains.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកចូលចិត្តជាងគេសម្រាប់ថ្ងៃភ្លៀង?", a_kh: "ខ្ញុំចូលចិត្តល្បែងផ្គុំរូប និងល្បែងក្តារនៅពេលភ្លៀង។" },
+                { q: "Do you enjoy DIY projects?", a: "Yes, I find satisfaction in creating and fixing things myself.", q_kh: "តើអ្នកចូលចិត្តគម្រោង DIY ឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញភាពពេញចិត្តក្នុងការបង្កើត និងជួសជុលរបស់ដោយខ្លួនឯង។" },
+                { q: "What hobby would you like to teach others?", a: "I'd enjoy teaching basic photography techniques.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកចង់បង្រៀនអ្នកដទៃ?", a_kh: "ខ្ញុំនឹងចូលចិត្តបង្រៀនបច្ចេកទេសថតរូបមូលដ្ឋាន។" },
+                { q: "Do you enjoy collecting things?", a: "I used to collect coins but now I prefer experiences over objects.", q_kh: "តើអ្នកចូលចិត្តប្រមូលរបស់ឬ?", a_kh: "ខ្ញុំធ្លាប់ប្រមូលកាក់ប៉ុន្តែឥឡូវនេះខ្ញុំចូលចិត្តបទពិសោធន៍ជាងវត្ថុ។" },
+                { q: "What's the most challenging hobby you've tried?", a: "Learning to play chess was quite challenging for me.", q_kh: "តើការកម្សាន្តអ្វីដែលលំបាកបំផុតដែលអ្នកបានសាកល្បង?", a_kh: "ការរៀនលេងចត្រង្គគឺពិតជាលំបាកសម្រាប់ខ្ញុំ។" },
+                { q: "Do you enjoy outdoor photography?", a: "Yes, I love capturing landscapes and nature scenes.", q_kh: "តើអ្នកចូលចិត្តការថតរូបក្រៅផ្ទះឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តថតយកទេសភាព និងឈុតធម្មជាតិ។" },
+                { q: "What hobby helps you be creative?", a: "Painting allows me to express my creativity freely.", q_kh: "តើការកម្សាន្តអ្វីដែលជួយអ្នកឱ្យមានភាពច្នៃប្រឌិត?", a_kh: "ការគូររូបអនុញ្ញាតឱ្យខ្ញុំបង្ហាញភាពច្នៃប្រឌិតរបស់ខ្ញុំដោយសេរី។" },
+                { q: "Do you enjoy cooking as a hobby?", a: "Yes, I find experimenting with new recipes enjoyable.", q_kh: "តើអ្នកចូលចិត្តចម្អិនអាហារជាការកម្សាន្តឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញការសាកល្បងរូបមន្តថ្មីៗគួរឱ្យពេញចិត្ត។" },
+                { q: "What's your favorite gardening activity?", a: "I enjoy planting new flowers and watching them grow.", q_kh: "តើសកម្មភាពដាំដំណាំអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ខ្ញុំចូលចិត្តដាំផ្កាថ្មី និងមើលពួកវាលូតលាស់។" },
+                { q: "Do you enjoy learning languages as a hobby?", a: "Yes, I find language learning fascinating and practical.", q_kh: "តើអ្នកចូលចិត្តរៀនភាសាជាការកម្សាន្តឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញការរៀនភាសាគួរឱ្យចាប់អារម្មណ៍ និងជាក់ស្តែង។" },
+                { q: "What hobby would you like to improve at?", a: "I'd like to become better at playing the guitar.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកចង់កែលម្អ?", a_kh: "ខ្ញុំចង់ក្លាយជាល្អជាងនេះនៅការលេងហ្គីតា។" },
+                { q: "Do you enjoy stargazing?", a: "Yes, I find the night sky fascinating and peaceful.", q_kh: "តើអ្នកចូលចិត្តការមើលផ្កាយឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញផ្ទៃអាកាសរាត្រីគួរឱ្យចាប់អារម្មណ៍ និងស្ងប់ស្ងាត់។" },
+                { q: "What's your favorite hobby for socializing?", a: "I enjoy board game nights with friends.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកចូលចិត្តជាងគេសម្រាប់ការសង្គម?", a_kh: "ខ្ញុំចូលចិត្តយប់ល្បែងក្តារជាមួយមិត្តភក្តិ។" },
+                { q: "Do you enjoy writing as a hobby?", a: "Yes, I keep a journal and sometimes write short stories.", q_kh: "តើអ្នកចូលចិត្តសរសេរជាការកម្សាន្តឬ?", a_kh: "បាទ/ចាស ខ្ញុំរក្សាកំណត់ហេតុ និងពេលខ្លះសរសេររឿងខ្លីៗ។" },
+                { q: "What hobby helps you stay active?", a: "Hiking and cycling keep me physically active.", q_kh: "តើការកម្សាន្តអ្វីដែលជួយអ្នកឱ្យរក្សាភាពសកម្ម?", a_kh: "ការឡើងភ្នំ និងការជិះកង់រក្សាខ្ញុំឱ្យសកម្មរាងកាយ។" },
+                { q: "Do you enjoy puzzle-solving hobbies?", a: "Yes, I enjoy crosswords and Sudoku.", q_kh: "តើអ្នកចូលចិត្តការកម្សាន្តដោះស្រាយល្បែងផ្គុំរូបឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តល្បែងពាក្យឆ្លងកាត់ និងស៊ូដូគូ។" },
+                { q: "What's your favorite hobby for relaxation?", a: "I find knitting to be very relaxing and meditative.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកចូលចិត្តជាងគេសម្រាប់ការសម្រាក?", a_kh: "ខ្ញុំរកឃើញការត្បាញគឺស្ងប់ស្ងាត់ និងសមាធិណាស់។" },
+                { q: "Do you enjoy birdwatching?", a: "Yes, I find it peaceful and educational.", q_kh: "តើអ្នកចូលចិត្តការមើលសត្វចំណាប់ឬ?", a_kh: "បាទ/ចាស ខ្ញុំរកឃើញវាស្ងប់ស្ងាត់ និងមានអប់រំ។" },
+                { q: "What hobby would you like to pass on to children?", a: "I'd love to teach children about gardening and nature.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកចង់បន្តទៅកុមារ?", a_kh: "ខ្ញុំចង់បង្រៀនកុមារអំពីការដាំដំណាំ និងធម្មជាតិ។" },
+                { q: "Do you enjoy digital hobbies?", a: "Yes, I enjoy digital art and photo editing.", q_kh: "តើអ្នកចូលចិត្តការកម្សាន្តឌីជីថលឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តសិល្បៈឌីជីថល និងការកែសម្រួលរូបថត។" },
+                { q: "What's your favorite hobby for winter?", a: "I enjoy reading by the fireplace during winter.", q_kh: "តើការកម្សាន្តអ្វីដែលអ្នកចូលចិត្តជាងគេសម្រាប់រដូវរងា?", a_kh: "ខ្ញុំចូលចិត្តអាននៅក្បែរបង្កាន់ភ្លើងក្នុងអំឡុងរដូវរងា។" },
+                { q: "Do you enjoy craft hobbies?", a: "Yes, I enjoy making handmade cards and decorations.", q_kh: "តើអ្នកចូលចិត្តការកម្សាន្តធ្វើដៃឬ?", a_kh: "បាទ/ចាស ខ្ញុំចូលចិត្តធ្វើកាតដៃ និងការតុបតែង។" },
+                { q: "What hobby connects you to your heritage?", a: "I enjoy learning traditional recipes from my culture.", q_kh: "តើការកម្សាន្តអ្វីដែលភ្ជាប់អ្នកទៅនឹងមរតករបស់អ្នក?", a_kh: "ខ្ញុំចូលចិត្តរៀនរូបមន្តប្រពៃណីពីវប្បធម៌របស់ខ្ញុំ។" },
+                { q: "Do you enjoy competitive hobbies?", a: "I enjoy friendly competition in sports and games.", q_kh: "តើអ្នកចូលចិត្តការកម្សាន្តប្រកួតប្រជែងឬ?", a_kh: "ខ្ញុំចូលចិត្តការប្រកួតប្រជែងដែលរាក់ទាក់ក្នុងកីឡា និងល្បែង។" },
+                { q: "What's your favorite hobby memory?", a: "My favorite memory is completing my first 10km hike.", q_kh: "តើការចងចាំការកម្សាន្តអ្វីដែលអ្នកចូលចិត្តជាងគេ?", a_kh: "ការចងចាំដែលខ្ញុំចូលចិត្តជាងគេគឺការបញ្ចប់ការឡើងភ្នំ ១០គីឡូម៉ែត្រដំបូងរបស់ខ្ញុំ។" }
+            ],
+            thinking: [
+                { q: "What is important for a happy life?", a: "For a happy life, it's important to have good relationships, meaningful work, and take care of your health.", q_kh: "តើអ្វីដែលសំខាន់សម្រាប់ជីវិតដែលសប្បាយរីករាយ?", a_kh: "សម្រាប់ជីវិតដែលសប្បាយរីករាយ វាសំខាន់ក្នុងការមានទំនាក់ទំនងល្អ ការងារដែលមានន័យ និងថែរក្សាសុខភាពរបស់អ្នក។" },
+                { q: "What life lesson has been most valuable to you?", a: "The most valuable lesson is that failure is part of success and helps us grow.", q_kh: "តើមេរៀនជីវិតអ្វីដែលមានតម្លៃជាងគេសម្រាប់អ្នក?", a_kh: "មេរៀនដែលមានតម្លៃជាងគេគឺថាការបរាជ័យគឺជាផ្នែកមួយនៃភាពជោគជ័យ និងជួយអោយយើងធំធាត់។" },
+                { q: "If you could give your younger self advice, what would it be?", a: "I would say worry less about others' opinions and trust your own instincts more.", q_kh: "ប្រសិនបើអ្នកអាចផ្តល់ដំបូន្មានដល់ខ្លួនឯងពីមុន តើវានឹងជាអ្វី?", a_kh: "ខ្ញុំនឹងនិយាយថាព្រួយបារម្ភអំពីមតិអ្នកដទៃតិចជាង និងទុកចិត្តលើសភាពវិញ្ញាណផ្ទាល់ខ្លួនរបស់អ្នកបន្ថែមទៀត។" },
+                { q: "What does success mean to you?", a: "Success means living a balanced life with meaningful relationships and personal growth.", q_kh: "តើភាពជោគជ័យមានន័យដូចម្តេចសម្រាប់អ្នក?", a_kh: "ភាពជោគជ័យមានន័យថារស់នៅជីវិតដែលមានតុល្យភាពជាមួយទំនាក់ទំនងដែលមានន័យ និងការលូតលាស់ផ្ទាល់ខ្លួន។" },
+                { q: "What qualities do you value most in people?", a: "I value honesty, kindness, and a good sense of humor in people.", q_kh: "តើគុណសម្បត្តិអ្វីខ្លះដែលអ្នកឲ្យតម្លៃជាងគេក្នុងមនុស្ស?", a_kh: "ខ្ញុំឲ្យតម្លៃនូវភាពស្មោះត្រង់ ការអាណិតស្រឡាញ់ និងអារម្មណ៍រីករាយល្អក្នុងមនុស្ស។" },
+                { q: "What would you do if you had more free time?", a: "I would spend more time learning new skills and with loved ones.", q_kh: "តើអ្នកនឹងធ្វើអ្វីប្រសិនបើអ្នកមានពេលទំនេរច្រើនជាងនេះ?", a_kh: "ខ្ញុំនឹងចំណាយពេលច្រើនជាងនេះក្នុងការរៀនជំនាញថ្មីៗ និងជាមួយអ្នកដែលជាទីស្រឡាញ់។" },
+                { q: "What makes a good friend?", a: "A good friend is trustworthy, supportive, and good at listening.", q_kh: "តើអ្វីដែលធ្វើឱ្យមានមិត្តភក្តិល្អ?", a_kh: "មិត្តភក្តិល្អគឺគួរឱ្យទុកចិត្ត គាំទ្រ និងល្អក្នុងការស្តាប់។" },
+                { q: "What are you most grateful for?", a: "I'm most grateful for my health, family, and opportunities I've had.", q_kh: "តើអ្នកដឹងគុណបំផុតចំពោះអ្វី?", a_kh: "ខ្ញុំដឹងគុណបំផុតចំពោះសុខភាពរបស់ខ្ញុំ គ្រួសារ និងឱកាសដែលខ្ញុំបានមាន។" },
+                { q: "What does happiness mean to you?", a: "Happiness means finding contentment in everyday moments and appreciating what you have.", q_kh: "តើភាពរីករាយមានន័យដូចម្តេចសម្រាប់អ្នក?", a_kh: "ភាពរីករាយមានន័យថាការស្វែងរកភាពពេញចិត្តក្នុងពេលវេលាប្រចាំថ្ងៃ និងការកោតសរសើរអ្វីដែលអ្នកមាន។" },
+                { q: "What would you like to be remembered for?", a: "I'd like to be remembered for being kind and making a positive difference.", q_kh: "តើអ្នកចង់អោយគេចងចាំអ្នកចំពោះអ្វី?", a_kh: "ខ្ញុំចង់អោយគេចងចាំខ្ញុំចំពោះការជាអ្នកអាណិតស្រឡាញ់ និងធ្វើឱ្យមានភាពខុសគ្នាវិជ្ជមាន។" },
+                { q: "What is your definition of a good life?", a: "A good life means having purpose, connection with others, and continuous growth.", q_kh: "តើនិយមន័យរបស់អ្នកអំពីជីវិតល្អគឺអ្វី?", a_kh: "ជីវិតល្អមានន័យថាមានគោលបំណង ការភ្ជាប់ទំនាក់ទំនងជាមួយអ្នកដទៃ និងការលូតលាស់បន្ត។" },
+                { q: "What makes you feel fulfilled?", a: "I feel fulfilled when I help others and achieve personal goals.", q_kh: "តើអ្វីដែលធ្វើឱ្យអ្នកមានអារម្មណ៍ពេញលេញ?", a_kh: "ខ្ញុំមានអារម្មណ៍ពេញលេញនៅពេលខ្ញុំជួយអ្នកដទៃ"}
+            ],}
+        
+        // បង្កើតបញ្ជីសំណួរ 'all' ដោយស្វ័យប្រវត្តិ
+        questions.all = [];
+        Object.keys(questions).filter(key => key !== 'all').forEach(category => {
+            questions.all = questions.all.concat(questions[category]);
+        });
+
+        // មុខងារសម្រាប់បកប្រែឈ្មោះប្រភេទ
+        const categoryNames = {
+            'all': 'ទាំងអស់ | All',
+            'daily': 'សកម្មភាពប្រចាំថ្ងៃ | Daily Activities',
+            'conversation': 'ការសន្ទនា | Conversation',
+            'food': 'អាហារ | Food',
+            'travel': 'ការធ្វើដំណើរ | Travel',
+            'shopping': 'ការទិញទំនិញ | Shopping',
+            'work': 'ការងារ | Work',
+            'health': 'សុខភាព | Health',
+            'hobbies': 'ចំណង់ចំណូលចិត្ត | Hobbies',
+            'thinking': 'សំណួរត្រិះរិះ | Thinking Questions'
+        };
+
+        // កូដ JavaScript
+        let currentCategory = 'all';
+        let currentQuestion = null;
+        const speechSynthesis = window.speechSynthesis;
+        
+        // ជ្រើសរើសធាតុ HTML
+        const questionElement = document.getElementById('question');
+        const questionTranslationElement = document.getElementById('question-translation');
+        const answerBox = document.getElementById('answer-box');
+        const answerElement = document.getElementById('answer');
+        const answerTranslationElement = document.getElementById('answer-translation');
+        const randomBtn = document.getElementById('random-btn');
+        const showAnswerBtn = document.getElementById('show-answer-btn');
+        const translateBtn = document.getElementById('translate-btn');
+        const speakQuestionBtn = document.getElementById('speak-question-btn');
+        const speakAnswerBtn = document.getElementById('speak-answer-btn');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const notification = document.getElementById('notification');
+        const questionCounter = document.getElementById('question-counter');
+        const categoryMainSection = document.getElementById('category-main-section');
+        const selectedCategoryHeader = document.getElementById('selected-category-header');
+        const selectedCategoryTitle = document.getElementById('selected-category-title');
+        const backBtn = document.getElementById('back-btn');
+
+
+        // មុខងារបង្ហាញចំនួនសំណួរសរុប
+        function updateQuestionCounter() {
+            const currentCatName = categoryNames[currentCategory] ? categoryNames[currentCategory].split(' | ')[0] : currentCategory;
+            const currentCatLength = questions[currentCategory]?.length || 0;
+            questionCounter.textContent = `សរុបសំណួរ: ${questions.all.length} (ក្នុង ${currentCatName} : ${currentCatLength})`;
+        }
+
+        // មុខងារបង្ហាញសំណួរចៃដន្យ
+        function getRandomQuestion() {
+            let availableQuestions = questions[currentCategory];
+            
+            if (!availableQuestions || availableQuestions.length === 0) {
+                questionElement.textContent = "មិនមានសំណួរក្នុងប្រភេទនេះទេ។";
+                
+                // លាក់ការបកប្រែ/ចម្លើយទាំងអស់
+                questionTranslationElement.style.display = 'none';
+                answerBox.style.display = 'none'; 
+                currentQuestion = null;
+                showNotification('មិនមានសំណួរក្នុងប្រភេទនេះទេ។');
+                updateQuestionCounter();
+                return;
+            }
+            
+            const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+            currentQuestion = availableQuestions[randomIndex];
+            
+            questionElement.textContent = currentQuestion.q;
+            
+            // លាក់ការបកប្រែ/ចម្លើយទាំងអស់
+            questionTranslationElement.style.display = 'none';
+            answerBox.style.display = 'none';
+            answerTranslationElement.style.display = 'none';
+            
+            updateQuestionCounter();
+            if (currentQuestion.q !== "សូមចុចប៊ូតុង \"សំណួរចៃដន្យ\" ដើម្បីចាប់ផ្តើម!") {
+                 showNotification('សំណួរថ្មីត្រូវបានបង្ហាញ!');
+            }
+        }
+
+        // មុខងារបង្ហាញចម្លើយ
+        function showAnswer() {
+            if (currentQuestion && currentQuestion.q !== "សូមចុចប៊ូតុង \"សំណួរចៃដន្យ\" ដើម្បីចាប់ផ្តើម!") {
+                answerElement.textContent = currentQuestion.a;
+                answerBox.style.display = 'flex'; // បង្ហាញប្រអប់ចម្លើយ
+                
+                // បង្ហាញការបកប្រែចម្លើយប្រសិនបើការបកប្រែសំណួរកំពុងបង្ហាញ
+                if (questionTranslationElement.style.display === 'block') {
+                    answerTranslationElement.textContent = currentQuestion.a_kh;
+                    answerTranslationElement.style.display = 'block';
+                }
+                showNotification('ចម្លើយត្រូវបានបង្ហាញ!');
+            } else {
+                showNotification('សូមជ្រើសរើសសំណួរមុន!');
+            }
+        }
+
+        // មុខងារបកប្រែសំណួរ និងចម្លើយ
+        function translateContent() {
+            if (currentQuestion && currentQuestion.q !== "សូមចុចប៊ូតុង \"សំណួរចៃដន្យ\" ដើម្បីចាប់ផ្តើម!") {
+                if (questionTranslationElement.style.display === 'none') {
+                    questionTranslationElement.textContent = currentQuestion.q_kh;
+                    questionTranslationElement.style.display = 'block';
+                    
+                    // បកប្រែចម្លើយ ប្រសិនបើចម្លើយកំពុងបង្ហាញ
+                    if (answerBox.style.display === 'flex') {
+                        answerTranslationElement.textContent = currentQuestion.a_kh;
+                        answerTranslationElement.style.display = 'block';
+                    }
+                    
+                    showNotification('បានបកប្រែជាភាសាខ្មែរ!');
+                } else {
+                    questionTranslationElement.style.display = 'none';
+                    answerTranslationElement.style.display = 'none';
+                    showNotification('បានលាក់ការបកប្រែ!');
+                }
+            } else {
+                showNotification('សូមជ្រើសរើសសំណួរមុន!');
+            }
+        }
+        
+        // មុខងារសម្រាប់យកសម្លេងភាសាអង់គ្លេស (កែតម្រូវសម្រាប់ iOS)
+        function getEnglishVoice() {
+             if (!speechSynthesis) return null;
+             
+             // ហៅ getVoices ម្ដងទៀតក្នុងករណីដែលវាមិនទាន់ផ្ទុកលើ iOS
+             const voices = speechSynthesis.getVoices(); 
+
+             // ព្យាយាមស្វែងរកសំឡេងដែលមានគុណភាពល្អ
+             const preferredVoices = [
+                 voice => voice.lang.startsWith('en-US') && voice.name.includes('Google'),
+                 voice => voice.lang.startsWith('en-US') && (voice.name.includes('Samantha') || voice.name.includes('Daniel') || voice.name.includes('Alex')), // iOS Voices
+                 voice => voice.lang.startsWith('en-US'),
+                 voice => voice.lang.startsWith('en')
+             ];
+
+             for (const filter of preferredVoices) {
+                 const voice = voices.find(filter);
+                 if (voice) return voice;
+             }
+             return null;
+        }
+
+        // មុខងារអានអត្ថបទ (សំណួរ ឬចម្លើយ) (កែតម្រូវសម្រាប់ iOS)
+        function speakText(text) {
+             if (!currentQuestion || currentQuestion.q === "សូមចុចប៊ូតុង \"សំណួរចៃដន្យ\" ដើម្បីចាប់ផ្តើម!") {
+                 showNotification('សូមជ្រើសរើសសំណួរមុន!');
+                 return;
+             }
+             if (!speechSynthesis) {
+                 showNotification('ការអានសម្លេងមិនត្រូវបានគាំទ្រលើឧបករណ៍នេះទេ។');
+                 return;
+             }
+             
+             speechSynthesis.cancel();
+             
+             const utterance = new SpeechSynthesisUtterance(text);
+             utterance.lang = 'en-US';
+             utterance.rate = 0.95;
+             
+             // កំណត់ Voice ភ្លាមៗ (នេះជួយដោះស្រាយបញ្ហា iOS)
+             const voice = getEnglishVoice();
+             if (voice) {
+                 utterance.voice = voice;
+                 speechSynthesis.speak(utterance);
+                 showNotification('កំពុងអាន...');
+             } else {
+                 // ប្រើលំនាំដើមប្រសិនបើមិនអាចរកសំឡេងបាន ប៉ុន្តែនៅតែដំណើរការ
+                 speechSynthesis.speak(utterance);
+                 showNotification('កំពុងអាន (មិនអាចកំណត់សំឡេងល្អបំផុត) ...');
+             }
+             
+        }
+
+        // មុខងារបង្ហាញការជូនដំណឹង
+        function showNotification(message) {
+            // កំណត់ opacity 0 និង reset animation មុននឹងចាប់ផ្តើមថ្មី
+            notification.classList.remove('show');
+            notification.style.animation = 'none';
+            // ហៅ reflow ដើម្បី reset animation
+            notification.offsetHeight; 
+            notification.style.animation = null; 
+
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            // ដក class 'show' ចេញបន្ទាប់ពី animation ចប់ (2.5s)
+            const duration = 2500;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, duration);
+        }
+
+        // មុខងារសម្រាប់កំណត់ធាតុប្រភេទ (លាក់/បង្ហាញប៊ូតុងប្រភេទ និងប៊ូតុង Back)
+        function setCategoryView(categoryKey) {
+            const isAll = categoryKey === 'all';
+            
+            if (!isAll) {
+                // លាក់ប៊ូតុងទាំងអស់, បង្ហាញ Header (Back Button)
+                categoryMainSection.classList.add('hidden');
+                selectedCategoryHeader.classList.remove('hidden');
+                selectedCategoryTitle.innerHTML = `<i class="fas fa-list"></i> ${categoryNames[categoryKey] || categoryKey}`;
+                
+                // កំណត់សំណួរដំបូងនៃប្រភេទដែលបានជ្រើសរើស
+                currentCategory = categoryKey;
+                getRandomQuestion();
+            } else {
+                // បង្ហាញប៊ូតុងទាំងអស់, លាក់ Header
+                categoryMainSection.classList.remove('hidden');
+                selectedCategoryHeader.classList.add('hidden');
+                
+                // កំណត់ទៅប្រភេទ All វិញ
+                currentCategory = 'all';
+                getRandomQuestion(); // ផ្ទុកសំណួរចៃដន្យថ្មី
+                
+                // បិទ Active Class ពីប៊ូតុងផ្សេងៗ និងដាក់លើ All វិញ
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.category-btn[data-category="all"]').classList.add('active');
+            }
+        }
+        
+        // កំណត់ព្រឹត្តិការណ៍សម្រាប់ប៊ូតុង Back
+        backBtn.addEventListener('click', function() {
+            setCategoryView('all');
+            showNotification('ត្រលប់ទៅប្រភេទទាំងអស់វិញ!');
+        });
+
+
+        // កំណត់ព្រឹត្តិការណ៍សម្រាប់ប៊ូតុងប្រភេទ
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const selectedCategory = this.getAttribute('data-category');
+                
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const categoryText = this.querySelector('.khmer').textContent.trim();
+                
+                if (selectedCategory === 'all') {
+                    setCategoryView('all');
+                } else {
+                    setCategoryView(selectedCategory);
+                }
+                
+                showNotification(`បានជ្រើសរើសប្រភេទ: ${categoryText}`);
+            });
+        });
+
+
+        // កំណត់ព្រឹត្តិការណ៍សម្រាប់ប៊ូតុងបញ្ជា
+        randomBtn.addEventListener('click', getRandomQuestion);
+        showAnswerBtn.addEventListener('click', showAnswer);
+        translateBtn.addEventListener('click', translateContent);
+        
+        // មុខងារ Speak (កែតម្រូវដើម្បីហៅមុខងារ SpeakText)
+        speakQuestionBtn.addEventListener('click', () => {
+            if (currentQuestion) speakText(currentQuestion.q);
+        });
+        speakAnswerBtn.addEventListener('click', () => {
+            if (currentQuestion) {
+                // បង្ហាញចម្លើយមុនពេលអាន បើវាមិនទាន់បង្ហាញ
+                if(answerBox.style.display === 'none') {
+                    showAnswer();
+                }
+                speakText(currentQuestion.a)
+            }
+        });
+
+        /*
+            *** ចំណាំ: កូដផ្ទុកសំឡេងខាងក្រោមត្រូវបានដកចេញ ឬកែតម្រូវក្នុង speakText រួចហើយ
+            *** ដោយសារតែវាមិនដំណើរការល្អលើ iOS ។
+        */
+        // if (speechSynthesis) {
+        //     speechSynthesis.getVoices(); 
+        //     speechSynthesis.onvoiceschanged = () => {
+        //         // លែងត្រូវការ voicesLoaded = true;
+        //     };
+        // }
+
+        // ចាប់ផ្តើមកម្មវិធី
+        getRandomQuestion();
+        
+    </script>
+</body>
+</html>

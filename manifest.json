@@ -1,0 +1,22 @@
+
+{
+    "name": "សំណួរភាសាអង់គ្លេស",
+    "short_name": "English QA",
+    "description": "បង្កើនសមត្ថភាពសន្ទនាភាសាអង់គ្លេសប្រចាំថ្ងៃ",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#1e2852",
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
